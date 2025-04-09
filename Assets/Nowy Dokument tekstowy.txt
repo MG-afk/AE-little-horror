@@ -1,0 +1,14 @@
+Wymyśl oraz zaimplementuj zagadkę środowiskową (nie musi być skomplikowana) 
+dla gry horrorowej należącej do gatunku “one room horror” (możesz sprawdzić tytuł Amanda:The Adventurer jako referencje nad którą kiedyś pracowaliśmy).
+Zagadka powinna skupiać się na 3 głównych elementach:
+
+Miecze
+Świeczniki
+Czaszki
+
+W projekcie znajduje się docelowa scena pojedyńczego pokoju. 
+Gracz powinien mieć możliwość poruszania się po scenie oraz wejścia w interakcję z odpowiednimi przedmiotami. 
+Zwróć szczególną uwagę na przejrzystość oraz klarowność zagadki i jakość kodu - jego czytelność i podatność na modyfikacje w przypadku potrzeby rozbudowania zagadki.
+Dodatkowymi atutami będzie:
+zadbanie o aspekty wizualne i dźwiękowe - w końcu ma to być horror (shadery, vfx, światła, sfx)
+skorzystanie z paczek dostępnych w projekcie (UniTask, DOTween) lub dodanie swoich
