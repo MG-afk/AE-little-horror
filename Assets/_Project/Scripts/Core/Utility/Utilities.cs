@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AE.Core
+namespace AE.Core.Utility
 {
     public class Utilities : MonoBehaviour
     {

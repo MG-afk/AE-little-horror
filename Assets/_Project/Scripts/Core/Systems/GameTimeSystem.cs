@@ -1,29 +1,41 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using AE.Core.Event;
+using AE.Core.GlobalGameState;
+using AE.Core.Types;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AE.Core.Systems
 {
     [UsedImplicitly]
-    public class GameTimeSystem
+    public class GameTimeSystem : IDisposable
     {
         private const float DefaultTimeScale = 1.0f;
+        private const float SlowTimeScale = 0.1f;
 
-        public void PauseTime()
+        private readonly EventManager _eventManager;
+        private readonly Dictionary<GameMode, float> _gameTime = new();
+
+        public GameTimeSystem(EventManager eventManager)
         {
-            Time.timeScale = 0f;
-            Debug.Log("Game time paused");
+            _eventManager = eventManager;
+
+            _gameTime[GameMode.Pause] = 0f;
+            _gameTime[GameMode.Gameplay] = DefaultTimeScale;
+            _gameTime[GameMode.Inspect] = SlowTimeScale;
+
+            _eventManager.Subscribe<GameStateEnterEvent>(ChangeTime);
         }
 
-        public void ResumeTime()
+        private void ChangeTime(in GameStateEnterEvent evt)
         {
-            Time.timeScale = DefaultTimeScale;
-            Debug.Log("Game time resumed");
+            Time.timeScale = _gameTime[evt.GameMode];
         }
 
-        public void SlowDownTime(float scale)
+        public void Dispose()
         {
-            Time.timeScale = scale;
-            Debug.Log($"Game time slowed down to {scale}");
+            _eventManager.Unsubscribe<GameStateEnterEvent>(ChangeTime);
         }
     }
 }

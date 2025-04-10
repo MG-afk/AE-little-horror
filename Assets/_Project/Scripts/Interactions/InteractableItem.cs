@@ -5,16 +5,10 @@ namespace AE.Interactions
     public class InteractableItem : MonoBehaviour, IInteractable
     {
         [SerializeField] private string interactionMessage = "Item was interacted with!";
-        
-        public void Interact(Transform interactor)
+
+        public void Interact()
         {
-            Debug.Log($"{interactionMessage} By: {interactor.name}");
-            // Add your interaction logic here
-        }
-        
-        public Transform GetTransform()
-        {
-            return transform;
+            Debug.Log($"{interactionMessage} By: {gameObject.name}");
         }
     }
 }

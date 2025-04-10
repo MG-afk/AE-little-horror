@@ -1,5 +1,10 @@
-﻿using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using AE.Core.Event;
+using AE.Core.GlobalGameState;
+using AE.Core.Types;
+using JetBrains.Annotations;
 using UnityEngine;
+using VContainer;
 
 namespace AE.Core.Systems
 {
@@ -10,35 +15,35 @@ namespace AE.Core.Systems
         [SerializeField] private AudioSource inspectionAudio;
         [SerializeField] private AudioSource pauseAudio;
 
-        public AudioSystem(AudioSource gameplayAudio, AudioSource inspectionAudio, AudioSource pauseAudio)
+        private readonly Dictionary<GameMode, AudioSource> _audioSystems = new();
+
+        private EventManager _eventManager;
+
+        [Inject]
+        private void Construct(EventManager eventManager)
         {
-            this.gameplayAudio = gameplayAudio;
-            this.inspectionAudio = inspectionAudio;
-            this.pauseAudio = pauseAudio;
+            _eventManager = eventManager;
+
+            _audioSystems[GameMode.Pause] = pauseAudio;
+            _audioSystems[GameMode.Gameplay] = gameplayAudio;
+            _audioSystems[GameMode.Inspect] = inspectionAudio;
+
+            _eventManager.Subscribe<GameStateEnterEvent>(SwitchAudio);
         }
 
-        public void SwitchToGameplayAudio()
+        private void OnDestroy()
         {
-            pauseAudio.Stop();
-            inspectionAudio.Stop();
-            gameplayAudio.Play();
-            Debug.Log("Switched to gameplay audio");
+            _eventManager.Unsubscribe<GameStateEnterEvent>(SwitchAudio);
         }
 
-        public void SwitchToInspectionAudio()
+        private void SwitchAudio(in GameStateEnterEvent evt)
         {
-            gameplayAudio.Stop();
-            pauseAudio.Stop();
-            inspectionAudio.Play();
-            Debug.Log("Switched to inspection audio");
-        }
+            foreach (var audioSystem in _audioSystems)
+            {
+                audioSystem.Value.Stop();
+            }
 
-        public void SwitchToPauseAudio()
-        {
-            gameplayAudio.Stop();
-            inspectionAudio.Stop();
-            pauseAudio.Play();
-            Debug.Log("Switched to pause audio");
+            _audioSystems[evt.GameMode].Play();
         }
     }
 }

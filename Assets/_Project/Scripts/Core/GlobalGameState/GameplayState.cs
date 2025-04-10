@@ -1,19 +1,19 @@
 ﻿using AE.Core.Types;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AE.Core.GlobalGameState
 {
+    [UsedImplicitly]
     public class GameplayState : GlobalGameStateMachine.State
     {
         public override void Enter()
         {
-            Debug.Log("Entering Gameplay State");
-            InputSystem.SwitchToGameMode(GameMode.Gameplay);
-            CameraSystem.SwitchToCamera(GameMode.Gameplay);
-            TimeSystem.ResumeTime();
-            AudioSystem.SwitchToGameplayAudio();
+            //TODO: Cursor System! 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            EventManager.Notify(new GameStateEnterEvent(GameMode.Gameplay));
         }
 
         public override void Exit()

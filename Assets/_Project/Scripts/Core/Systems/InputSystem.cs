@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using AE.Core.Event;
+using AE.Core.GlobalGameState;
 using AE.Core.Types;
 using AE.Game.Core.Input;
 using JetBrains.Annotations;
@@ -13,6 +15,7 @@ namespace AE.Core.Systems
     {
         public event Action<Vector2> Moved;
         public event Action Interacted;
+        public event Action Exited;
         public event Action<Vector2> Rotated;
         public event Action<float> Zoomed;
         public event Action Accepted;
@@ -22,30 +25,35 @@ namespace AE.Core.Systems
         private readonly InputActions _inputActions;
         private InputActionMap _currentActionMap;
         private GameMode _currentGameMode;
+        private EventManager _eventManager;
 
         private readonly Dictionary<GameMode, InputActionMap> _actionMaps = new();
 
-        public InputSystem()
+        public InputSystem(EventManager eventManager)
         {
+            _eventManager = eventManager;
             _inputActions = new InputActions();
 
             _inputActions.Player.SetCallbacks(new PlayerInputCallbacks(this));
             _inputActions.Inspect.SetCallbacks(new InspectInputCallbacks(this));
 
-            _actionMaps[GameMode.Pause] = null; //TODO: implement the UI/Pause inputs
+            _actionMaps[GameMode.Pause] = _inputActions.Inspect; //TODO: implement the UI/Pause inputs
             _actionMaps[GameMode.Inspect] = _inputActions.Inspect;
             _actionMaps[GameMode.Gameplay] = _inputActions.Player;
 
-            SwitchToGameMode(GameMode.Gameplay);
+            _eventManager.Subscribe<GameStateEnterEvent>(SwitchToGameMode);
         }
 
         public void Dispose()
         {
+            _eventManager.Unsubscribe<GameStateEnterEvent>(SwitchToGameMode);
+
             _inputActions?.Dispose();
         }
 
-        public void SwitchToGameMode(GameMode gameMode)
+        private void SwitchToGameMode(in GameStateEnterEvent gameStateEnterEvent)
         {
+            var gameMode = gameStateEnterEvent.GameMode;
             _currentActionMap?.Disable();
 
             if (!_actionMaps.TryGetValue(gameMode, out var actionMap))
@@ -84,11 +92,11 @@ namespace AE.Core.Systems
                 }
             }
 
-            public void OnPause(InputAction.CallbackContext context)
+            public void OnExit(InputAction.CallbackContext context)
             {
                 if (context.performed)
                 {
-                    //TODO: pause input
+                    _inputSystem.Exited?.Invoke();
                 }
             }
         }

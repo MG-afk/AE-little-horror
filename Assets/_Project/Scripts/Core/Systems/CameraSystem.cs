@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using AE.Core.Event;
 using AE.Core.Types;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
 using UnityEngine;
+using VContainer;
 
 namespace AE.Core.Systems
 {
@@ -16,19 +18,34 @@ namespace AE.Core.Systems
 
         private readonly Dictionary<GameMode, CinemachineCamera> _cinemachineCameras = new();
 
+        private EventManager _eventManager;
         private CinemachineCamera _activeCamera;
 
         public Transform MainCameraTransform => mainCamera.transform;
+
+        [Inject]
+        private void Construct(EventManager eventManager)
+        {
+            _eventManager = eventManager;
+        }
 
         private void Awake()
         {
             _cinemachineCameras[GameMode.Pause] = pauseCinemachineCamera;
             _cinemachineCameras[GameMode.Gameplay] = firstPersonCinemachineCamera;
             _cinemachineCameras[GameMode.Inspect] = inspectCinemachineCamera;
+
+            _eventManager.Subscribe<GameStateEnterEvent>(SwitchToCamera);
         }
 
-        public void SwitchToCamera(GameMode gameMode)
+        private void OnDestroy()
         {
+            _eventManager.Unsubscribe<GameStateEnterEvent>(SwitchToCamera);
+        }
+
+        private void SwitchToCamera(in GameStateEnterEvent gameStateEnterEvent)
+        {
+            var gameMode = gameStateEnterEvent.GameMode;
             if (_cinemachineCameras.TryGetValue(gameMode, out var cinemachineCamera))
             {
                 if (_activeCamera != null)

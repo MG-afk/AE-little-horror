@@ -1,28 +1,37 @@
-﻿using AE.Core;
-using DG.Tweening;
+﻿using System;
+using AE.Core;
+using AE.Core.Commands;
+using AE.Core.GlobalGameState;
+using AE.Core.Types;
+using AE.Core.Utility;
 using JetBrains.Annotations;
 using VContainer.Unity;
 
 namespace AE
 {
     [UsedImplicitly]
-    public sealed class Bootstrapper : IStartable
+    public sealed class Bootstrapper : IStartable, IDisposable
     {
         private readonly Utilities _utilities;
+        private readonly CommandBus _commandBus;
 
-        public Bootstrapper(Utilities utilities)
+        public Bootstrapper(
+            Utilities utilities,
+            CommandBus commandBus)
         {
             _utilities = utilities;
+            _commandBus = commandBus;
         }
 
         public void Start()
         {
-            var canvasGroup = _utilities.FadeCanvasGroup;
+            _utilities.FadeOut(1f);
+            _commandBus.Execute(new ChangeGameStateCommand(GameMode.Gameplay));
+        }
 
-            canvasGroup.gameObject.SetActive(true);
-            canvasGroup.alpha = 1;
-            canvasGroup.DOFade(0, 1f).SetEase(Ease.Linear)
-                .OnComplete(() => { canvasGroup.gameObject.SetActive(false); });
+        public void Dispose()
+        {
+            // TODO release managed resources here
         }
     }
 }

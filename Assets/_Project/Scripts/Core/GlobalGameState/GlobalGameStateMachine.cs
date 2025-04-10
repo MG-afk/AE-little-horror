@@ -1,5 +1,7 @@
-﻿using AE.Core.StateMachines;
-using AE.Core.Systems;
+﻿using System.Collections.Generic;
+using AE.Core.Event;
+using AE.Core.StateMachines;
+using AE.Core.Types;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
@@ -11,22 +13,12 @@ namespace AE.Core.GlobalGameState
     {
         public abstract class State : IState
         {
-            protected InputSystem InputSystem { get; private set; }
-            protected CameraSystem CameraSystem { get; private set; }
-            protected GameTimeSystem TimeSystem { get; private set; }
-            protected AudioSystem AudioSystem { get; private set; }
+            protected EventManager EventManager;
 
             [Inject]
-            private void Construct(
-                InputSystem inputSystem,
-                CameraSystem cameraSystem,
-                GameTimeSystem timeSystem,
-                AudioSystem audioSystem)
+            private void Construct(EventManager eventManager)
             {
-                InputSystem = inputSystem;
-                CameraSystem = cameraSystem;
-                TimeSystem = timeSystem;
-                AudioSystem = audioSystem;
+                EventManager = eventManager;
             }
 
             public abstract void Enter();
@@ -37,11 +29,28 @@ namespace AE.Core.GlobalGameState
             }
         }
 
+        private readonly Dictionary<GameMode, State> _states = new();
+
+        public GlobalGameStateMachine(
+            GameplayState gameplayState,
+            PauseState pauseState,
+            InspectState inspectState)
+        {
+            _states[GameMode.Gameplay] = gameplayState;
+            _states[GameMode.Pause] = pauseState;
+            _states[GameMode.Inspect] = inspectState;
+        }
+
+        public void ChangeState(GameMode gameMode)
+        {
+            ChangeState(_states[gameMode]);
+        }
+
         public override void ChangeState(State newState)
         {
             base.ChangeState(newState);
 
-            Debug.Log($"Entering {nameof(newState)} State");
+            Debug.Log($"Entering {newState.GetType().Name} State");
         }
     }
 }
