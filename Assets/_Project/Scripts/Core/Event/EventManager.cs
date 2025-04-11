@@ -9,7 +9,7 @@ namespace AE.Core.Event
     {
         private readonly Dictionary<Type, List<Delegate>> _eventSubscribers = new();
 
-        public void Subscribe<TEvent>(EventHandler<TEvent> handler) where TEvent : IEvent
+        public void Subscribe<TEvent>(EventHandler<TEvent> handler) where TEvent : struct, IEvent
         {
             var eventType = typeof(TEvent);
             if (!_eventSubscribers.ContainsKey(eventType))
@@ -20,13 +20,13 @@ namespace AE.Core.Event
             _eventSubscribers[eventType].Add(handler);
         }
 
-        public void Unsubscribe<TEvent>(EventHandler<TEvent> handler) where TEvent : IEvent
+        public void Unsubscribe<TEvent>(EventHandler<TEvent> handler) where TEvent : struct, IEvent
         {
             var eventType = typeof(TEvent);
-            if (!_eventSubscribers.ContainsKey(eventType))
+            if (!_eventSubscribers.TryGetValue(eventType, out var subscriber))
                 return;
 
-            _eventSubscribers[eventType].Remove(handler);
+            subscriber.Remove(handler);
 
             if (_eventSubscribers[eventType].Count == 0)
             {
@@ -34,16 +34,15 @@ namespace AE.Core.Event
             }
         }
 
-        public void Notify<TEvent>(TEvent eventData) where TEvent : IEvent
+        public void Notify<TEvent>(TEvent eventData) where TEvent : struct, IEvent
         {
             var eventType = typeof(TEvent);
-            if (!_eventSubscribers.ContainsKey(eventType))
+            if (!_eventSubscribers.TryGetValue(eventType, out var handlers))
                 return;
 
-            var handlers = _eventSubscribers[eventType];
-            foreach (EventHandler<TEvent> handler in handlers)
+            foreach (var @delegate in handlers)
             {
-                handler(in eventData);
+                ((EventHandler<TEvent>)@delegate)(in eventData);
             }
         }
     }

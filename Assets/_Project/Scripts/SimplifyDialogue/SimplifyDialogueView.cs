@@ -26,34 +26,31 @@ namespace AE.SimplifyDialogue
         [SerializeField] private Ease fadeOutEase = Ease.InQuad;
 
         [Header("Audio")] [SerializeField] private AudioSource typingSoundSource;
-        [SerializeField] private List<AudioClip> horrorStingers;
+        [SerializeField] private AudioClip horrorStinger;
 
-        private bool isAnimating = false;
+        private bool _isAnimating;
 
         private void Awake()
         {
-            if (canvasGroup == null)
-                canvasGroup = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
-
             canvasGroup.alpha = 0f;
             dialogueText.text = "";
 
-            if (typingSoundSource == null)
-            {
-                typingSoundSource = gameObject.AddComponent<AudioSource>();
-                typingSoundSource.volume = 0.5f;
-                typingSoundSource.pitch = 0.9f;
-            }
+            if (typingSoundSource != null)
+                return;
+
+            typingSoundSource = gameObject.AddComponent<AudioSource>();
+            typingSoundSource.volume = 0.5f;
+            typingSoundSource.pitch = 0.9f;
         }
 
         public async UniTask Show(string text)
         {
-            if (isAnimating)
+            if (_isAnimating)
             {
                 DOTween.Kill(dialogueText);
             }
 
-            isAnimating = true;
+            _isAnimating = true;
 
             dialogueText.text = text;
             ApplyHorrorStyling();
@@ -63,11 +60,12 @@ namespace AE.SimplifyDialogue
             dialogueText.alpha = 0f;
 
             await canvasGroup.DOFade(1f, fadeInDuration).SetEase(fadeInEase).AsyncWaitForCompletion();
+
+            typingSoundSource.PlayOneShot(horrorStinger, Random.Range(0.3f, 0.6f));
+
             await dialogueText.DOFade(1f, 1.2f).SetEase(Ease.InOutSine).AsyncWaitForCompletion();
 
-            PlayRandomStinger();
-
-            isAnimating = false;
+            _isAnimating = false;
 
             await Hide();
         }
@@ -85,18 +83,6 @@ namespace AE.SimplifyDialogue
             dialogueText.fontStyle = FontStyles.Bold;
             dialogueText.characterSpacing = Random.Range(-2f, 2f);
             dialogueText.enableVertexGradient = true;
-        }
-
-        private void PlayRandomStinger()
-        {
-            if (horrorStingers != null && horrorStingers.Count > 0 && typingSoundSource != null)
-            {
-                if (Random.value < 0.5f)
-                {
-                    var stinger = horrorStingers[Random.Range(0, horrorStingers.Count)];
-                    typingSoundSource.PlayOneShot(stinger, Random.Range(0.3f, 0.6f));
-                }
-            }
         }
     }
 }

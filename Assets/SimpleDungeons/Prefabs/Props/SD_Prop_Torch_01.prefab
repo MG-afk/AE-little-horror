@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2352374}
   - component: {fileID: 9594020}
   - component: {fileID: 64079002430255724}
-  - component: {fileID: 7219457761075898572}
+  - component: {fileID: 6808129127118272590}
   m_Layer: 13
   m_Name: SD_Prop_Torch_01
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43081527694497710, guid: d3724de6480da954a8da9d64fad984f5, type: 2}
---- !u!114 &7219457761075898572
+--- !u!114 &6808129127118272590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,11 +144,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 129940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae286a0299034865873f01e9083da3a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2def7ffee5bd4401bbdda675f849c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _candlesticks:
-  - {fileID: 1205254019354202224}
+  key: fire_progress
+  condition: fire_progress=3
+  fireId: 4
+  fire: {fileID: 1205254019354202224}
 --- !u!1001 &797218961125637668
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,3 +16,6 @@ MonoBehaviour:
   - soundType: 1
     clip: {fileID: 8300000, guid: 0adaedde7a538c047a0c2435fd2943ad, type: 3}
     defaultVolume: 1
+  - soundType: 5
+    clip: {fileID: 8300000, guid: 345aea710dff5294f9e9af9d7a5e2b2a, type: 3}
+    defaultVolume: 1

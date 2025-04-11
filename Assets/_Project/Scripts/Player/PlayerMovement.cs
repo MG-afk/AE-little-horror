@@ -1,4 +1,7 @@
-﻿using AE.Core.Systems;
+﻿using AE.Core.Input;
+using AE.Core.Systems;
+using AE.Core.Systems.Audio;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -13,15 +16,22 @@ namespace AE.Player
 
         private InputSystem _inputSystem;
         private Transform _cameraTransform;
+        private AudioSystem _audioSystem;
+
         private Vector3 _direction;
         private Vector3 _velocity;
         private bool _isGrounded;
+        private bool _audioIsPlaying;
 
         [Inject]
-        private void Construct(InputSystem inputSystem, CameraSystem cameraSystem)
+        private void Construct(
+            InputSystem inputSystem,
+            CameraSystem cameraSystem,
+            AudioSystem audioSystem)
         {
             _inputSystem = inputSystem;
             _cameraTransform = cameraSystem.MainCameraTransform;
+            _audioSystem = audioSystem;
         }
 
         private void Awake()
@@ -68,11 +78,28 @@ namespace AE.Player
             facingDirection.Normalize();
 
             characterController.Move(facingDirection * (speed * Time.deltaTime));
+            PlayFootstepSound();
         }
 
         private void OnMove(Vector2 input)
         {
             _direction = new Vector3(input.x, 0, input.y).normalized;
+        }
+
+        private void PlayFootstepSound()
+        {
+            if (_audioIsPlaying)
+                return;
+
+            var source = _audioSystem.PlaySound(SoundType.PlayerFootstep, transform.position - Vector3.up * 2f);
+            _audioIsPlaying = true;
+            Sound(source).Forget();
+        }
+
+        private async UniTask Sound(AudioSource source)
+        {
+            await UniTask.WaitForSeconds(source.clip.length);
+            _audioIsPlaying = false;
         }
     }
 }

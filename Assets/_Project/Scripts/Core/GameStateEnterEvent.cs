@@ -3,7 +3,7 @@ using AE.Core.Types;
 
 namespace AE.Core
 {
-    public class GameStateEnterEvent : IEvent
+    public readonly struct GameStateEnterEvent : IEvent
     {
         public GameMode GameMode { get; }
 

@@ -707,10 +707,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1746311748001805969}
-  resumeButton: {fileID: 0}
-  optionsButton: {fileID: 0}
-  exitButton: {fileID: 0}
-  hoverSound: {fileID: 8300000, guid: 0adaedde7a538c047a0c2435fd2943ad, type: 3}
+  resumeButton: {fileID: 4290631627926055071}
+  optionsButton: {fileID: 8079427890876869552}
+  exitButton: {fileID: 5829709273539330401}
 --- !u!1 &6129532014163960839
 GameObject:
   m_ObjectHideFlags: 0

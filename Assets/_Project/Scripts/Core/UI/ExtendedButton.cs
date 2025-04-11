@@ -37,13 +37,7 @@ namespace AE.Core.UI
             base.Awake();
             _originalScale = transform.localScale;
             _buttonImage = GetComponent<Image>();
-
-            if (audioSystem == null)
-            {
-                audioSystem = FindObjectOfType<AudioSystem>();
-            }
-
-            // Store the initial color if not set
+            
             if (normalColor == Color.white && _buttonImage != null)
             {
                 normalColor = _buttonImage.color;

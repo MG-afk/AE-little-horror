@@ -1,6 +1,7 @@
 ﻿using System;
 using AE.Core;
 using AE.Core.Commands;
+using AE.Core.Input;
 using AE.Core.Systems;
 using AE.Core.Types;
 using JetBrains.Annotations;

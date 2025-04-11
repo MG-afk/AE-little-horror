@@ -1,7 +1,6 @@
-﻿using AE.Core.Systems;
+﻿using AE.Core.Input;
 using AE.Core.Utility;
 using AE.Interactions;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -14,15 +13,11 @@ namespace AE.Player
 
         private InputSystem _inputSystem;
         private IInteractable _currentInteractable;
-        private Utilities _utilities;
 
         [Inject]
-        private void Construct(
-            InputSystem inputSystem,
-            Utilities utilities)
+        private void Construct(InputSystem inputSystem)
         {
             _inputSystem = inputSystem;
-            _utilities = utilities;
         }
 
         private void Awake()
@@ -60,7 +55,6 @@ namespace AE.Player
                 return;
 
             _currentInteractable.Interact();
-            _utilities.SimplifyDialogueView.Show(_currentInteractable.Text).Forget();
         }
     }
 }

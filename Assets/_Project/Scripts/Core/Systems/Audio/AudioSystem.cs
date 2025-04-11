@@ -90,13 +90,10 @@ namespace AE.Core.Systems.Audio
             if (soundType == SoundType.None)
                 return;
 
-            // Try to get from cache first
-            if (!_soundCache.TryGetValue(soundType, out AudioClip clip))
+            if (!_soundCache.TryGetValue(soundType, out var clip))
             {
-                // Try to get from database if not in cache
                 clip = soundsDatabase?.GetSound(soundType);
 
-                // Cache for future use if found
                 if (clip != null)
                 {
                     _soundCache[soundType] = clip;
@@ -110,6 +107,7 @@ namespace AE.Core.Systems.Audio
             }
 
             var source = GetAvailableAudioSource();
+
             if (source == null)
                 return;
 
@@ -148,18 +146,15 @@ namespace AE.Core.Systems.Audio
             StartCoroutine(DisableAfterPlay(source));
         }
 
-        public void PlaySound(SoundType soundType, Vector3 position, float volumeMultiplier = 1f)
+        public AudioSource PlaySound(SoundType soundType, Vector3 position, float volumeMultiplier = 1f)
         {
             if (soundType == SoundType.None)
-                return;
+                return null;
 
-            // Try to get from cache first
             if (!_soundCache.TryGetValue(soundType, out AudioClip clip))
             {
-                // Try to get from database if not in cache
                 clip = soundsDatabase?.GetSound(soundType);
 
-                // Cache for future use if found
                 if (clip != null)
                 {
                     _soundCache[soundType] = clip;
@@ -169,12 +164,12 @@ namespace AE.Core.Systems.Audio
             if (clip == null)
             {
                 Debug.LogWarning($"Sound not found for type: {soundType}");
-                return;
+                return null;
             }
 
             var source = GetAvailableAudioSource();
             if (source == null)
-                return;
+                return null;
 
             source.transform.position = position;
             source.clip = clip;
@@ -187,6 +182,8 @@ namespace AE.Core.Systems.Audio
             source.Play();
 
             StartCoroutine(DisableAfterPlay(source));
+
+            return source;
         }
 
         private AudioSource GetAvailableAudioSource()

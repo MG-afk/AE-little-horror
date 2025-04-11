@@ -253,19 +253,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1316891726541194964}
+  canvas: {fileID: 266917695191443144}
   canvasGroup: {fileID: 2050313528774201222}
   backgroundPanel: {fileID: 8219626282455899770}
-  typingSpeed: 0.05
-  glitchProbability: 0.1
-  shakeMagnitude: 1
-  distortionAmount: 0.2
   fadeInDuration: 0.8
   fadeOutDuration: 1.2
   fadeInEase: 12
   fadeOutEase: 11
   typingSoundSource: {fileID: 0}
-  typingSoundClips: []
-  horrorStingers: []
+  horrorStinger: {fileID: 8300000, guid: fcaf5893023c7b84f94e686e8740e4ab, type: 3}
 --- !u!225 &2050313528774201222
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -274,9 +270,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5260213079892562301}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &8881120253450829513
 GameObject:
