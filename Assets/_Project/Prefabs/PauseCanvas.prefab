@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7535729275959324299}
   - component: {fileID: 720484610381090201}
   - component: {fileID: 6482585031446617214}
-  - component: {fileID: 2112079862043922692}
+  - component: {fileID: 8079427890876869552}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2112079862043922692
+--- !u!114 &8079427890876869552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 127828181877580666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e451838159c445bd8fe8e4345bd8524b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -121,6 +121,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  audioSystem: {fileID: 0}
+  hoverSoundType: 1
+  clickSoundType: 2
+  useHoverEffects: 1
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+  hoverScaleFactor: 1.05
+  hoverTransitionDuration: 0.1
+  useClickAnimation: 1
+  clickScaleReduction: 0.95
+  clickAnimationDuration: 0.1
 --- !u!1 &1315172785700391881
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +521,7 @@ GameObject:
   - component: {fileID: 7404945063535052491}
   - component: {fileID: 385417183987077500}
   - component: {fileID: 9145595075178959627}
-  - component: {fileID: 4340271320602812751}
+  - component: {fileID: 5829709273539330401}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -576,7 +587,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4340271320602812751
+--- !u!114 &5829709273539330401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -585,7 +596,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2310074484360656731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e451838159c445bd8fe8e4345bd8524b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -620,6 +631,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  audioSystem: {fileID: 0}
+  hoverSoundType: 1
+  clickSoundType: 2
+  useHoverEffects: 1
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+  hoverScaleFactor: 1.05
+  hoverTransitionDuration: 0.1
+  useClickAnimation: 1
+  clickScaleReduction: 0.95
+  clickAnimationDuration: 0.1
 --- !u!1 &4716297335048441625
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,9 +707,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1746311748001805969}
-  resumeButton: {fileID: 4408643291663957170}
-  optionsButton: {fileID: 2112079862043922692}
-  exitButton: {fileID: 4340271320602812751}
+  resumeButton: {fileID: 0}
+  optionsButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  hoverSound: {fileID: 8300000, guid: 0adaedde7a538c047a0c2435fd2943ad, type: 3}
 --- !u!1 &6129532014163960839
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +994,7 @@ GameObject:
   - component: {fileID: 5911995991808215806}
   - component: {fileID: 3763843141739327961}
   - component: {fileID: 4766315311528193221}
-  - component: {fileID: 4408643291663957170}
+  - component: {fileID: 4290631627926055071}
   m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
@@ -1037,7 +1060,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4408643291663957170
+--- !u!114 &4290631627926055071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1046,7 +1069,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6722890879945041852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e451838159c445bd8fe8e4345bd8524b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1081,6 +1104,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  audioSystem: {fileID: 0}
+  hoverSoundType: 1
+  clickSoundType: 2
+  useHoverEffects: 1
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+  hoverScaleFactor: 1.05
+  hoverTransitionDuration: 0.1
+  useClickAnimation: 1
+  clickScaleReduction: 0.95
+  clickAnimationDuration: 0.1
 --- !u!1 &9048289046434568102
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,14 +40,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111909846246830633}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 0
-    m_Value: -2
+    m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -134,7 +134,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -265,9 +265,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650db924fda9496b833e2fea0dcd10ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundsDatabase: {fileID: 11400000, guid: 8a3882e7e02abf748bc15139743a4170, type: 2}
   gameplayAudio: {fileID: 4532382776777897523}
   inspectionAudio: {fileID: 106310570959773875}
   pauseAudio: {fileID: 2326076731230440109}
+  pooledAudioSourceCount: 10
+  audioSourcePrefab: {fileID: 6339631582352102890, guid: eb0a898ebb75dd14cbc617e7b0cb6a94, type: 3}
+  audioSourcePoolParent: {fileID: 8561128217511877850}
 --- !u!1 &5669691436416493521
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +365,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6398227542424117706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
@@ -465,7 +469,7 @@ MonoBehaviour:
       Owner: {fileID: 3948793771518708857}
       Enabled: 1
       Input:
-        InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
+        InputAction: {fileID: -8708481639568031971, guid: afc347079e0be3f4c9b7c7baeae634ef, type: 3}
         Gain: 1
         LegacyInput: 
         LegacyGain: 1
@@ -478,7 +482,7 @@ MonoBehaviour:
       Owner: {fileID: 3948793771518708857}
       Enabled: 1
       Input:
-        InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
+        InputAction: {fileID: -8708481639568031971, guid: afc347079e0be3f4c9b7c7baeae634ef, type: 3}
         Gain: -1
         LegacyInput: 
         LegacyGain: 1
@@ -529,14 +533,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6802633696264652543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
     Enabled: 0
-    m_Value: 1
+    m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -623,7 +627,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -810,6 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <FadeCanvasGroup>k__BackingField: {fileID: 0}
+  <SimplifyDialogueView>k__BackingField: {fileID: 0}
 --- !u!1 &7852923742602682713
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +860,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 877493c295781d544850c66a6da529da, type: 3}
   m_Resource: {fileID: 8300000, guid: 877493c295781d544850c66a6da529da, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

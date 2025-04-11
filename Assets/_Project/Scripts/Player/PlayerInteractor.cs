@@ -1,6 +1,7 @@
 ﻿using AE.Core.Systems;
 using AE.Core.Utility;
 using AE.Interactions;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -13,12 +14,15 @@ namespace AE.Player
 
         private InputSystem _inputSystem;
         private IInteractable _currentInteractable;
-        private bool _isInteracting;
+        private Utilities _utilities;
 
         [Inject]
-        private void Construct(InputSystem inputSystem)
+        private void Construct(
+            InputSystem inputSystem,
+            Utilities utilities)
         {
             _inputSystem = inputSystem;
+            _utilities = utilities;
         }
 
         private void Awake()
@@ -39,7 +43,7 @@ namespace AE.Player
         private void CheckForInteractables()
         {
             var foundInteractable = Raycaster.RaycastCenter(interactionDistance, interactableLayerMask,
-                out IInteractable interactable);
+                out var interactable);
 
             if (!foundInteractable)
             {
@@ -52,12 +56,11 @@ namespace AE.Player
 
         private void OnInteract()
         {
-            if (_currentInteractable == null || _isInteracting)
+            if (_currentInteractable == null)
                 return;
 
-            _isInteracting = true;
             _currentInteractable.Interact();
-            _isInteracting = false;
+            _utilities.SimplifyDialogueView.Show(_currentInteractable.Text).Forget();
         }
     }
 }

@@ -2,13 +2,11 @@
 
 namespace AE.Interactions
 {
-    public class InteractableItem : MonoBehaviour, IInteractable
+    public abstract class InteractableItem : MonoBehaviour, IInteractable
     {
-        [SerializeField] private string interactionMessage = "Item was interacted with!";
+        public Transform Transform => transform;
+        public abstract string Text { get; }
 
-        public void Interact()
-        {
-            Debug.Log($"{interactionMessage} By: {gameObject.name}");
-        }
+        public abstract void Interact();
     }
 }

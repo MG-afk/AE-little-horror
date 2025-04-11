@@ -2,6 +2,8 @@
 using AE.Core;
 using AE.Core.Commands;
 using AE.Core.GlobalGameState;
+using AE.Core.Systems;
+using AE.Core.Systems.Audio;
 using AE.Core.Types;
 using AE.Core.Utility;
 using JetBrains.Annotations;
@@ -14,13 +16,16 @@ namespace AE
     {
         private readonly Utilities _utilities;
         private readonly CommandBus _commandBus;
+        private readonly AudioSystem _audioSystem;
 
         public Bootstrapper(
             Utilities utilities,
-            CommandBus commandBus)
+            CommandBus commandBus,
+            AudioSystem audioSystem)
         {
             _utilities = utilities;
             _commandBus = commandBus;
+            _audioSystem = audioSystem;
         }
 
         public void Start()

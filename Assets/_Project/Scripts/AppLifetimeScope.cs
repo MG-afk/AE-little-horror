@@ -18,7 +18,7 @@ namespace AE
             coreModule.Install(builder);
             pauseModule.Install(builder);
 
-            builder.RegisterInstance(utilities).As<Utilities>();
+            builder.RegisterComponent(utilities);
 
             builder.RegisterEntryPoint<PauseReactor>();
             builder.RegisterEntryPoint<Bootstrapper>();

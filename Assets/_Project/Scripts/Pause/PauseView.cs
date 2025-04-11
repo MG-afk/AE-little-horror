@@ -12,7 +12,7 @@ namespace AE.Pause
     public class PauseView : MonoBehaviour
     {
         private const float AnimationDuration = 1f;
-        private const Ease AnimationEase = Ease.OutBounce;
+        private const Ease AnimationEase = Ease.InSine;
 
         [SerializeField] private CanvasGroup canvasGroup;
 
@@ -44,13 +44,12 @@ namespace AE.Pause
         {
             resumeButton.onClick.RemoveListener(Resume);
             exitButton.onClick.RemoveListener(ExitGame);
-
-            _currentAnimation?.Kill();
         }
 
         public async UniTask ShowAsync()
         {
-            _currentAnimation?.Kill();
+            if (_currentAnimation != null && _currentAnimation.IsPlaying())
+                return;
 
             gameObject.SetActive(true);
 
@@ -71,7 +70,8 @@ namespace AE.Pause
             if (!gameObject.activeInHierarchy)
                 return;
 
-            _currentAnimation?.Kill();
+            if (_currentAnimation != null && _currentAnimation.IsPlaying())
+                return;
 
             _currentAnimation = DOTween.Sequence();
             _currentAnimation.Join(transform.DOScale(0f, AnimationDuration).SetEase(AnimationEase));
