@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4108431842840794610}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,6 +75,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   characterController: {fileID: 6661602761735550538}
+  stepInterval: 0.5
+  minPitch: 0.8
+  maxPitch: 1.2
+  footstepVolume: 0.5
+  groundCheckDistance: 0.5
+  airborneGracePeriod: 0.25
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &4108431842840794610
 MonoBehaviour:
   m_ObjectHideFlags: 0

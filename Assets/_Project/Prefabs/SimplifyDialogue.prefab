@@ -256,12 +256,9 @@ MonoBehaviour:
   canvas: {fileID: 266917695191443144}
   canvasGroup: {fileID: 2050313528774201222}
   backgroundPanel: {fileID: 8219626282455899770}
-  fadeInDuration: 0.8
   fadeOutDuration: 1.2
   fadeInEase: 12
   fadeOutEase: 11
-  typingSoundSource: {fileID: 0}
-  horrorStinger: {fileID: 8300000, guid: fcaf5893023c7b84f94e686e8740e4ab, type: 3}
 --- !u!225 &2050313528774201222
 CanvasGroup:
   m_ObjectHideFlags: 0

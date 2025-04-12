@@ -166,7 +166,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9ddd025d7dc60094cbe5e713f0ae6c41, type: 3}
   m_Resource: {fileID: 8300000, guid: 9ddd025d7dc60094cbe5e713f0ae6c41, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -175,7 +175,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -3,6 +3,8 @@ using AE.Core.Commands;
 using AE.Core.GlobalGameState;
 using AE.Core.Input;
 using AE.Core.Systems;
+using AE.Core.Utility;
+using AE.Interactions.Manipulable;
 using AE.Riddle;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -30,18 +32,21 @@ namespace AE.Interactions.Inspectable
         private float _currentZoom = 1f;
         private bool _isInspecting = false;
         private Transform _originalParent;
+        private ManipulationHintUI _manipulationHintUI;
 
         [Inject]
         private void Construct(
             CameraSystem cameraSystem,
             CommandBus commandBus,
             InputSystem inputSystem,
-            RiddleBlackboard blackboard)
+            RiddleBlackboard blackboard,
+            Utilities utilities)
         {
             _cameraSystem = cameraSystem;
             _commandBus = commandBus;
             _inputSystem = inputSystem;
             _blackboard = blackboard;
+            _manipulationHintUI = utilities.ManipulationHintUI;
         }
 
         private void Update()
@@ -51,8 +56,8 @@ namespace AE.Interactions.Inspectable
 
             if (Input.GetMouseButton(0))
             {
-                float mouseX = Input.GetAxis("Mouse X");
-                float mouseY = Input.GetAxis("Mouse Y");
+                var mouseX = Input.GetAxis("Mouse X");
+                var mouseY = Input.GetAxis("Mouse Y");
                 _currentItem.Transform.Rotate(Vector3.up, -mouseX * rotationSpeed, Space.World);
                 _currentItem.Transform.Rotate(Vector3.right, mouseY * rotationSpeed, Space.World);
             }
@@ -77,7 +82,7 @@ namespace AE.Interactions.Inspectable
             {
                 _blackboard.SetValue(item.Key, RiddleConstant.Inspected);
             }
-            
+
             _currentItem = item;
             _currentItem.Rigidbody.isKinematic = true;
 
@@ -89,6 +94,7 @@ namespace AE.Interactions.Inspectable
             item.Transform.SetParent(inspectedItemHolder, true);
             item.Transform.localPosition = Vector3.zero;
             item.Transform.localRotation = Quaternion.identity;
+            _manipulationHintUI.ShowPlacementHints();
 
             _commandBus.Execute(new ChangeGameStateCommand(GameMode.Inspect));
         }
@@ -106,6 +112,7 @@ namespace AE.Interactions.Inspectable
 
             _currentItem = null;
             _originalParent = null;
+            _manipulationHintUI.Hide();
         }
     }
 }

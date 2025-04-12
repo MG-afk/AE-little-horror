@@ -29,7 +29,7 @@ namespace AE.Interactions
 
         private void Reset()
         {
-            const FindObjectsInactive findObjects = FindObjectsInactive.Exclude;
+            const FindObjectsInactive findObjects = FindObjectsInactive.Include;
             const FindObjectsSortMode sortMode = FindObjectsSortMode.None;
 
             interactableItems = FindObjectsByType<InteractableItem>(findObjects, sortMode).ToList();

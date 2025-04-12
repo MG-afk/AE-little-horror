@@ -46,14 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inspectedItemHolder: {fileID: 0}
-  transitionDuration: 0.5
   rotationSpeed: 5
   zoomSpeed: 0.5
   minZoom: 1
   maxZoom: 2
-  takeItemKey: 116
-  toggleLightKey: 108
-  inspectionLight: {fileID: 0}
 --- !u!114 &3046066106560452406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,23 +62,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d8d803d9bc48a389f6a8d5c98caf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemHoldPoint: {fileID: 0}
-  placementSurfaces:
-    serializedVersion: 2
-    m_Bits: 1
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 0
   holdDistance: 2
   minHoldDistance: 1
   maxHoldDistance: 3
-  transitionDuration: 0.3
-  moveSensitivity: 0.1
-  usePhysicsPlacement: 1
-  placementCheckRadius: 0.2
-  wallCheckDistance: 0.5
-  moveBackDistance: 0.2
-  manipulationHintUI: {fileID: 0}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  maxMoveSpeed: 10
+  collisionOffset: 0.1
 --- !u!1 &1111909846246830633
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +361,7 @@ Transform:
   - {fileID: 1301942788641398409}
   - {fileID: 4068841783578546621}
   - {fileID: 7462319180679533095}
+  - {fileID: 5195301483021470712}
   m_Father: {fileID: 6832135428990702075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3342357539343534347
@@ -392,6 +380,82 @@ MonoBehaviour:
   pauseCinemachineCamera: {fileID: 516149703787908573}
   firstPersonCinemachineCamera: {fileID: 7290329912280614963}
   inspectCinemachineCamera: {fileID: 2054045265435902168}
+  gameOverCinemachineCamera: {fileID: 2683679234758072768}
+--- !u!1 &6306951426812686524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5195301483021470712}
+  - component: {fileID: 2683679234758072768}
+  m_Layer: 0
+  m_Name: GameOverCinemachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5195301483021470712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6306951426812686524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1248989643385783477}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2683679234758072768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6306951426812686524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &6398227542424117706
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,10 +743,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d8318e2bd83a36545a116bb6310ad48f, type: 3}
+  m_Resource: {fileID: 8300000, guid: d8318e2bd83a36545a116bb6310ad48f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -874,9 +938,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78247d9b0a24eeeab33f4a25f8295e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverScreen: {fileID: 0}
   <FadeCanvasGroup>k__BackingField: {fileID: 0}
   <SimplifyDialogueView>k__BackingField: {fileID: 0}
   <Crosshair>k__BackingField: {fileID: 0}
+  <ManipulationHintUI>k__BackingField: {fileID: 0}
+  <Ghost>k__BackingField: {fileID: 0}
 --- !u!1 &7852923742602682713
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,8 +986,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 877493c295781d544850c66a6da529da, type: 3}
-  m_Resource: {fileID: 8300000, guid: 877493c295781d544850c66a6da529da, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -1054,6 +1121,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  triggers:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

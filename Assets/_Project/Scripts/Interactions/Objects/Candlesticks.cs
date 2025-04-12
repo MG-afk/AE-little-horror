@@ -12,7 +12,6 @@ namespace AE.Interactions.Objects
         [SerializeField] private ParticleSystem[] particles;
         [SerializeField] private Renderer[] renderers;
         [SerializeField] private Light[] lights;
-        [SerializeField] private float colorTransitionTime = 1.0f;
         [SerializeField] private AnimationCurve colorTransitionCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField] private Gradient flameGradient;
         [SerializeField] private float lightIntensity = 1.5f;
@@ -43,15 +42,15 @@ namespace AE.Interactions.Objects
             if (key != RiddleConstant.FireProgress)
                 return;
 
-            if (value == RiddleConstant.Incorrect)
+            switch (value)
             {
-                SetActivateCandlesticks(false).Forget();
-                _blackboard.Remove(key);
-            }
-
-            if (value == RiddleConstant.Done)
-            {
-                ChangeColorAsync(Color.blue, 10f).Forget();
+                case RiddleConstant.Incorrect:
+                    SetActivateCandlesticks(false).Forget();
+                    _blackboard.Remove(key);
+                    break;
+                case RiddleConstant.Done:
+                    ChangeColorAsync(Color.blue, 10f).Forget();
+                    break;
             }
         }
 

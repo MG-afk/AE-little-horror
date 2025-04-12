@@ -15,6 +15,7 @@ namespace AE.Core.Systems
         [SerializeField] private CinemachineCamera pauseCinemachineCamera;
         [SerializeField] private CinemachineCamera firstPersonCinemachineCamera;
         [SerializeField] private CinemachineCamera inspectCinemachineCamera;
+        [SerializeField] private CinemachineCamera gameOverCinemachineCamera;
 
         private readonly Dictionary<GameMode, CinemachineCamera> _cinemachineCameras = new();
 
@@ -35,6 +36,7 @@ namespace AE.Core.Systems
             _cinemachineCameras[GameMode.Pause] = pauseCinemachineCamera;
             _cinemachineCameras[GameMode.Gameplay] = firstPersonCinemachineCamera;
             _cinemachineCameras[GameMode.Inspect] = inspectCinemachineCamera;
+            _cinemachineCameras[GameMode.GameOver] = gameOverCinemachineCamera;
 
             _eventManager.Subscribe<GameStateEnterEvent>(SwitchToCamera);
         }
@@ -72,7 +74,7 @@ namespace AE.Core.Systems
             toCamera.transform.rotation = fromCamera.transform.rotation;
         }
 
-        public CinemachineCamera GetCamera(GameMode mode)
+        public CinemachineCamera GetCinemachine(GameMode mode)
         {
             return _cinemachineCameras[mode];
         }
