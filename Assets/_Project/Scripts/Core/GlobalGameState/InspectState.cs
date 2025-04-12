@@ -1,4 +1,4 @@
-﻿using AE.Core.Types;
+﻿using AE.Interactions.Inspectable;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -7,6 +7,13 @@ namespace AE.Core.GlobalGameState
     [UsedImplicitly]
     public class InspectState : GlobalGameStateMachine.State
     {
+        private readonly InspectSystem _inspectSystem;
+
+        public InspectState(InspectSystem inspectSystem)
+        {
+            _inspectSystem = inspectSystem;
+        }
+
         public override void Enter()
         {
             Cursor.lockState = CursorLockMode.None;
@@ -17,7 +24,7 @@ namespace AE.Core.GlobalGameState
 
         public override void Exit()
         {
-            Debug.Log("Exiting Inspect State");
+            _inspectSystem.ExitInspection();
         }
     }
 }

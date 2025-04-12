@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AE.Core.Event;
-using AE.Core.Types;
+using AE.Core.GlobalGameState;
 using JetBrains.Annotations;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -22,6 +22,7 @@ namespace AE.Core.Systems
         private CinemachineCamera _activeCamera;
 
         public Transform MainCameraTransform => mainCamera.transform;
+        public Camera MainCamera => mainCamera;
 
         [Inject]
         private void Construct(EventManager eventManager)
@@ -55,12 +56,25 @@ namespace AE.Core.Systems
 
                 cinemachineCamera.enabled = true;
                 _activeCamera = cinemachineCamera;
-                Debug.Log($"Switched camera to {gameMode} mode");
             }
             else
             {
                 Debug.LogWarning($"No camera found for game mode: {gameMode}");
             }
+        }
+
+        public void AlignCameras(GameMode from, GameMode to)
+        {
+            var fromCamera = _cinemachineCameras[from];
+            var toCamera = _cinemachineCameras[to];
+
+            toCamera.transform.position = fromCamera.transform.position;
+            toCamera.transform.rotation = fromCamera.transform.rotation;
+        }
+
+        public CinemachineCamera GetCamera(GameMode mode)
+        {
+            return _cinemachineCameras[mode];
         }
     }
 }

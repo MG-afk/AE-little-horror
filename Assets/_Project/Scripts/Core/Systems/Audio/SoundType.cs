@@ -12,15 +12,10 @@ namespace AE.Core.Systems.Audio
 
         // Gameplay Sounds
         PlayerFootstep,
-        PlayerJump,
         ItemPickup,
         DoorOpen,
         DoorClose,
-
-        // Combat Sounds
-        WeaponFire,
-        WeaponReload,
-        Impact,
+        DoorKnocking,
 
         // Ambience Sounds
         AmbientWind,
@@ -30,7 +25,5 @@ namespace AE.Core.Systems.Audio
         Success,
         Failure,
         Warning,
-
-        // Add more as needed
     }
 }

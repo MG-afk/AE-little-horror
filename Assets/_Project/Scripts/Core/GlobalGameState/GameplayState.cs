@@ -1,5 +1,4 @@
-﻿using AE.Core.Types;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AE.Core.GlobalGameState
@@ -10,7 +9,7 @@ namespace AE.Core.GlobalGameState
         public override void Enter()
         {
             //TODO: Cursor System! 
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;   
             Cursor.visible = false;
 
             EventManager.Notify(new GameStateEnterEvent(GameMode.Gameplay));
@@ -18,7 +17,6 @@ namespace AE.Core.GlobalGameState
 
         public override void Exit()
         {
-            Debug.Log("Exiting Gameplay State");
         }
     }
 }

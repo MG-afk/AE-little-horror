@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AE.Core.Event;
-using AE.Core.Types;
+using AE.Core.GlobalGameState;
 using JetBrains.Annotations;
 using UnityEngine;
 

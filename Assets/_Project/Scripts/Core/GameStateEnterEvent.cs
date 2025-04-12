@@ -1,5 +1,5 @@
 ﻿using AE.Core.Event;
-using AE.Core.Types;
+using AE.Core.GlobalGameState;
 
 namespace AE.Core
 {

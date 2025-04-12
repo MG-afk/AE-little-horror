@@ -1,4 +1,7 @@
+using System;
+using AE.Core.Utility;
 using AE.Riddle;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -10,16 +13,20 @@ namespace AE.Interactions.Objects
         [SerializeField] private GameObject fire;
 
         private RiddleBlackboard _blackboard;
+        private Utilities _utilities;
 
         [Inject]
-        private void Construct(RiddleBlackboard blackboard)
+        private void Construct(RiddleBlackboard blackboard, Utilities utilities)
         {
             _blackboard = blackboard;
+            _utilities = utilities;
+
+            _blackboard.NewValueSet += OnBlackboardChanged;
         }
 
-        private void Awake()
+        private void OnDestroy()
         {
-            _blackboard.NewValueSet += OnBlackboardChanged;
+            _blackboard.NewValueSet -= OnBlackboardChanged;
         }
 
         private void OnBlackboardChanged(string key, string value)
@@ -42,6 +49,9 @@ namespace AE.Interactions.Objects
             if (!_blackboard.CheckCondition(Condition))
             {
                 _blackboard.SetValue(RiddleConstant.FireProgress, RiddleConstant.Incorrect);
+
+                _utilities.SimplifyDialogueView.Show("Looks like I can't fire that up", 1.5f).Forget();
+
                 return;
             }
 

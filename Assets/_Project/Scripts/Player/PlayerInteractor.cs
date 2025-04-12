@@ -1,4 +1,5 @@
 ﻿using AE.Core.Input;
+using AE.Core.Systems;
 using AE.Core.Utility;
 using AE.Interactions;
 using UnityEngine;
@@ -13,11 +14,13 @@ namespace AE.Player
 
         private InputSystem _inputSystem;
         private IInteractable _currentInteractable;
+        private Camera _camera;
 
         [Inject]
-        private void Construct(InputSystem inputSystem)
+        private void Construct(InputSystem inputSystem, CameraSystem cameraSystem)
         {
             _inputSystem = inputSystem;
+            _camera = cameraSystem.MainCamera;
         }
 
         private void Awake()
@@ -37,7 +40,9 @@ namespace AE.Player
 
         private void CheckForInteractables()
         {
-            var foundInteractable = Raycaster.RaycastCenter(interactionDistance, interactableLayerMask,
+            var foundInteractable = _camera.RaycastCenter(
+                interactionDistance,
+                interactableLayerMask,
                 out var interactable);
 
             if (!foundInteractable)
@@ -51,10 +56,7 @@ namespace AE.Player
 
         private void OnInteract()
         {
-            if (_currentInteractable == null)
-                return;
-
-            _currentInteractable.Interact();
+            _currentInteractable?.Interact();
         }
     }
 }

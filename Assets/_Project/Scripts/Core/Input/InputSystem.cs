@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AE.Core.Event;
-using AE.Core.Types;
+using AE.Core.GlobalGameState;
 using AE.Game.Core.Input;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -13,6 +13,7 @@ namespace AE.Core.Input
     public sealed class InputSystem : IDisposable
     {
         public event Action<Vector2> Moved;
+        public event Action Sprinted;
         public event Action Interacted;
         public event Action Exited;
         public event Action<Vector2> Rotated;
@@ -22,9 +23,12 @@ namespace AE.Core.Input
 
         private readonly InputActions _inputActions;
         private InputActionMap _currentActionMap;
-        private EventManager _eventManager;
+        private readonly EventManager _eventManager;
 
         private readonly Dictionary<GameMode, InputActionMap> _actionMaps = new();
+
+        //TODO: bind it better currently sprinted
+        public bool HoldSecondKey { get; private set; }
 
         public InputSystem(EventManager eventManager)
         {
@@ -96,6 +100,16 @@ namespace AE.Core.Input
                 {
                     _inputSystem.Exited?.Invoke();
                 }
+            }
+
+            public void OnSprint(InputAction.CallbackContext context)
+            {
+                if (context.performed)
+                {
+                    _inputSystem.Sprinted?.Invoke();
+                }
+
+                _inputSystem.HoldSecondKey = context.performed;
             }
         }
 

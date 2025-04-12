@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using AE.Core.Event;
 using AE.Core.StateMachines;
-using AE.Core.Types;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
@@ -44,13 +43,6 @@ namespace AE.Core.GlobalGameState
         public void ChangeState(GameMode gameMode)
         {
             ChangeState(_states[gameMode]);
-        }
-
-        public override void ChangeState(State newState)
-        {
-            base.ChangeState(newState);
-
-            Debug.Log($"Entering {newState.GetType().Name} State");
         }
     }
 }

@@ -4,7 +4,6 @@ using AE.Core.Commands;
 using AE.Core.GlobalGameState;
 using AE.Core.Systems;
 using AE.Core.Systems.Audio;
-using AE.Core.Types;
 using AE.Core.Utility;
 using JetBrains.Annotations;
 using VContainer.Unity;

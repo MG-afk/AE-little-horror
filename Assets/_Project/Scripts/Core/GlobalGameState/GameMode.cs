@@ -1,4 +1,4 @@
-﻿namespace AE.Core.Types
+﻿namespace AE.Core.GlobalGameState
 {
     public enum GameMode
     {

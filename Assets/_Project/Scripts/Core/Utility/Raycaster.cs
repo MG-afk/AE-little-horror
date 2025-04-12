@@ -5,9 +5,13 @@ namespace AE.Core.Utility
 {
     public static class Raycaster
     {
-        public static bool RaycastCenter(float distance, LayerMask layerMask, out IInteractable interactable)
+        public static bool RaycastCenter(
+            this Camera camera,
+            float distance,
+            LayerMask layerMask,
+            out IInteractable interactable)
         {
-            var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            var ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             interactable = null;
 
             if (!Physics.Raycast(ray, out var hit, distance, layerMask))

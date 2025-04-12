@@ -1,5 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &731962375019141021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3422279930032621065}
+  - component: {fileID: 1654485025076666209}
+  - component: {fileID: 3046066106560452406}
+  m_Layer: 0
+  m_Name: InteractionSystems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3422279930032621065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731962375019141021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6832135428990702075}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1654485025076666209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731962375019141021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446b4b8eca77486082527dcfd739e328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectedItemHolder: {fileID: 0}
+  transitionDuration: 0.5
+  rotationSpeed: 5
+  zoomSpeed: 0.5
+  minZoom: 1
+  maxZoom: 2
+  takeItemKey: 116
+  toggleLightKey: 108
+  inspectionLight: {fileID: 0}
+--- !u!114 &3046066106560452406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731962375019141021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d8d803d9bc48a389f6a8d5c98caf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemHoldPoint: {fileID: 0}
+  placementSurfaces:
+    serializedVersion: 2
+    m_Bits: 1
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  holdDistance: 2
+  minHoldDistance: 1
+  maxHoldDistance: 3
+  transitionDuration: 0.3
+  moveSensitivity: 0.1
+  usePhysicsPlacement: 1
+  placementCheckRadius: 0.2
+  wallCheckDistance: 0.5
+  moveBackDistance: 0.2
+  manipulationHintUI: {fileID: 0}
 --- !u!1 &1111909846246830633
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1301942788641398409}
   - component: {fileID: 516149703787908573}
-  - component: {fileID: 4880247666763350505}
   m_Layer: 0
   m_Name: PauseCinemachine
   m_TagString: Untagged
@@ -76,19 +158,6 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &4880247666763350505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111909846246830633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damping: 0
 --- !u!1 &1241598175976496342
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +572,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7462319180679533095}
   - component: {fileID: 2054045265435902168}
-  - component: {fileID: 1550846543749394841}
   m_Layer: 0
   m_Name: InspectCinemachine
   m_TagString: Untagged
@@ -569,19 +637,6 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &1550846543749394841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6802633696264652543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LookAtOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &6863751887960292439
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +800,7 @@ Transform:
   - {fileID: 8561128217511877850}
   - {fileID: 1248989643385783477}
   - {fileID: 793411021387989667}
+  - {fileID: 3422279930032621065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7584936994803063853
@@ -769,8 +825,11 @@ MonoBehaviour:
     cameraSystem: {fileID: 3342357539343534347}
   pauseModule:
     pauseView: {fileID: 0}
+  interactableModule:
+    inspectSystem: {fileID: 1654485025076666209}
+    itemManipulationSystem: {fileID: 3046066106560452406}
+    interactionInitializer: {fileID: 6175823281059882022}
   utilities: {fileID: 1452288189984260568}
-  interactionInitializer: {fileID: 6175823281059882022}
 --- !u!1 &7450325367650982476
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FadeCanvasGroup>k__BackingField: {fileID: 0}
   <SimplifyDialogueView>k__BackingField: {fileID: 0}
+  <Crosshair>k__BackingField: {fileID: 0}
 --- !u!1 &7852923742602682713
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +1051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableItems:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

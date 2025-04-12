@@ -12,6 +12,8 @@ namespace AE.Pause
 
         public void Install(IContainerBuilder builder)
         {
+            builder.RegisterEntryPoint<PauseReactor>();
+
             builder.RegisterComponent(pauseView);
         }
     }

@@ -1,5 +1,5 @@
 ﻿using AE.Core.Event;
-using AE.Core.Types;
+using AE.Core.Systems;
 using AE.Pause;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
@@ -12,13 +12,16 @@ namespace AE.Core.GlobalGameState
     {
         private readonly EventManager _eventManager;
         private readonly PauseView _pauseView;
+        private readonly CameraSystem _cameraSystem;
 
         public PauseState(
             EventManager eventManager,
-            PauseView pauseView)
+            PauseView pauseView,
+            CameraSystem cameraSystem)
         {
             _eventManager = eventManager;
             _pauseView = pauseView;
+            _cameraSystem = cameraSystem;
         }
 
         public override void Enter()
@@ -28,6 +31,7 @@ namespace AE.Core.GlobalGameState
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
+            _cameraSystem.AlignCameras(GameMode.Gameplay, GameMode.Pause);
             _pauseView.ShowAsync().Forget();
         }
 

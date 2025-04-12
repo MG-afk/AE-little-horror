@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AE.Core.StateMachines
 {
@@ -7,10 +6,7 @@ namespace AE.Core.StateMachines
     {
         private T _currentState;
 
-        public T CurrentState => _currentState;
-        public event Action<T> OnStateChanged;
-
-        public virtual void ChangeState(T newState)
+        protected void ChangeState(T newState)
         {
             if (EqualityComparer<T>.Default.Equals(_currentState, newState))
                 return;
@@ -18,7 +14,6 @@ namespace AE.Core.StateMachines
             _currentState?.Exit();
             _currentState = newState;
             _currentState.Enter();
-            OnStateChanged?.Invoke(_currentState);
         }
 
         public void Update()

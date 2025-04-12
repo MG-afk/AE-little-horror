@@ -40,6 +40,11 @@ namespace AE.Riddle
             var key = parts[0].Trim();
             var expectedValue = parts[1].Trim();
 
+            return CheckCondition(key, expectedValue);
+        }
+
+        private bool CheckCondition(string key, string expectedValue)
+        {
             return HasKey(key) && GetValue(key) == expectedValue;
         }
 

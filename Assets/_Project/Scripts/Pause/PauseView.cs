@@ -1,6 +1,6 @@
 ﻿using AE.Core;
 using AE.Core.Commands;
-using AE.Core.Types;
+using AE.Core.GlobalGameState;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace AE.Pause
 {
     public class PauseView : MonoBehaviour
     {
-        private const float AnimationDuration = 1f;
+        private const float AnimationDuration = .25f;
         private const Ease AnimationEase = Ease.InSine;
 
         [SerializeField] private CanvasGroup canvasGroup;
