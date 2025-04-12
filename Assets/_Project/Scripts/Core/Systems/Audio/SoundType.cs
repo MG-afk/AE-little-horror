@@ -25,5 +25,7 @@ namespace AE.Core.Systems.Audio
         Success,
         Failure,
         Warning,
+        
+        FireUp,
     }
 }

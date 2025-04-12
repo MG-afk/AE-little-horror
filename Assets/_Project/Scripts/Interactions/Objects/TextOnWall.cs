@@ -31,15 +31,19 @@ namespace AE.Interactions.Objects
 
         private void OnBlackboardChanged(string key, string value)
         {
+            if (key == Key)
+                return;
+
             if (!_blackboard.CheckCondition(Condition))
                 return;
 
+            _blackboard.SetValue(Key, RiddleConstant.Inspected);
             gameObject.SetActive(true);
         }
 
         public override void Interact()
         {
-            _utilities.SimplifyDialogueView.Show("What that means?").Forget();
+            _utilities.SimplifyDialogueView.Show("What does that mean...?\nIs this some kind of warning?\n").Forget();
         }
     }
 }

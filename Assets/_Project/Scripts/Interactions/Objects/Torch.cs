@@ -1,4 +1,4 @@
-using System;
+using AE.Core.Systems.Audio;
 using AE.Core.Utility;
 using AE.Riddle;
 using Cysharp.Threading.Tasks;
@@ -11,15 +11,21 @@ namespace AE.Interactions.Objects
     {
         [SerializeField] private string fireId;
         [SerializeField] private GameObject fire;
+        [SerializeField] private AudioSource fireAudio;
 
         private RiddleBlackboard _blackboard;
         private Utilities _utilities;
+        private AudioSystem _audioSystem;
 
         [Inject]
-        private void Construct(RiddleBlackboard blackboard, Utilities utilities)
+        private void Construct(
+            RiddleBlackboard blackboard,
+            Utilities utilities,
+            AudioSystem audioSystem)
         {
             _blackboard = blackboard;
             _utilities = utilities;
+            _audioSystem = audioSystem;
 
             _blackboard.NewValueSet += OnBlackboardChanged;
         }
@@ -40,22 +46,26 @@ namespace AE.Interactions.Objects
             if (value == RiddleConstant.Incorrect)
             {
                 SetActiveCandlesticks(false);
+                fireAudio.Stop();
                 _blackboard.Remove(key);
             }
         }
 
         public override void Interact()
         {
+            _audioSystem.PlaySound(SoundType.FireUp);
+
             if (!_blackboard.CheckCondition(Condition))
             {
                 _blackboard.SetValue(RiddleConstant.FireProgress, RiddleConstant.Incorrect);
 
-                _utilities.SimplifyDialogueView.Show("Looks like I can't fire that up", 1.5f).Forget();
+                _utilities.SimplifyDialogueView.Show("Looks like I can't fire that up.", 1.5f).Forget();
 
                 return;
             }
 
             SetActiveCandlesticks(true);
+            fireAudio.Play();
 
             _blackboard.SetValue(Key, fireId);
         }

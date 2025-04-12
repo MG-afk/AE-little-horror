@@ -10,12 +10,14 @@ namespace AE.Player
     {
         private const float Gravity = 9.81f;
 
-        [Header("Movement Settings")]
-        [SerializeField] private float speed = 5f;
+        [Header("Movement Settings")] [SerializeField]
+        private float speed = 5f;
+
         [SerializeField] private CharacterController characterController;
-        
-        [Header("Footstep Settings")]
-        [SerializeField] private float footstepDistance = 2.0f; // Distance between footsteps
+
+        [Header("Footstep Settings")] [SerializeField]
+        private float footstepDistance = 2.0f;
+
         [SerializeField, Range(0.8f, 1.2f)] private float minPitch = 0.8f;
         [SerializeField, Range(0.8f, 1.2f)] private float maxPitch = 1.2f;
         [SerializeField, Range(0.1f, 1.0f)] private float footstepVolume = 0.5f;
@@ -97,14 +99,12 @@ namespace AE.Player
 
         private void UpdateFootsteps()
         {
-            // Handle cooldown timer
             if (_footstepCooldown > 0)
             {
                 _footstepCooldown -= Time.deltaTime;
                 return;
             }
 
-            // Only play footsteps when grounded and moving
             if (!_isGrounded || _direction == Vector3.zero)
             {
                 _distanceTraveled = 0;
@@ -112,47 +112,39 @@ namespace AE.Player
                 return;
             }
 
-            // Calculate horizontal distance traveled since last update
-            Vector3 currentPosition = transform.position;
-            Vector3 movement = currentPosition - _lastPosition;
-            movement.y = 0; // Only consider horizontal movement
-            float movementMagnitude = movement.magnitude;
-            
-            // Prevent potential teleportation issues
+            var currentPosition = transform.position;
+            var movement = currentPosition - _lastPosition;
+            movement.y = 0;
+            var movementMagnitude = movement.magnitude;
+
             if (movementMagnitude > 10f)
             {
                 _lastPosition = currentPosition;
                 _distanceTraveled = 0;
                 return;
             }
-            
+
             _distanceTraveled += movementMagnitude;
             _lastPosition = currentPosition;
 
-            // Play footstep sound when we've traveled enough distance
             if (_distanceTraveled >= footstepDistance)
             {
                 PlayFootstepSound();
-                _distanceTraveled = 0; // Reset distance counter
+                _distanceTraveled = 0;
             }
         }
 
         private void PlayFootstepSound()
         {
-            // Calculate footstep position slightly below the player
-            Vector3 footstepPosition = transform.position - Vector3.up * 0.5f;
-            
-            // Play the sound
+            var footstepPosition = transform.position - Vector3.up * 0.5f;
+
             var source = _audioSystem.PlaySound(SoundType.PlayerFootstep, footstepPosition, footstepVolume);
-            
+
             if (source != null)
             {
-                // Randomize pitch for variety
                 source.pitch = Random.Range(minPitch, maxPitch);
-                
-                // Implement a safety cooldown to prevent rapid firing of sounds
-                // Use 80% of the clip length as a minimum, to allow for some overlap
-                float clipLength = source.clip?.length ?? 0.5f;
+
+                var clipLength = source.clip?.length ?? 0.5f;
                 _footstepCooldown = Mathf.Max(0.1f, clipLength * 0.8f);
             }
         }

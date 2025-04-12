@@ -15,10 +15,11 @@ MonoBehaviour:
   sounds:
   - soundType: 1
     clip: {fileID: 8300000, guid: 0adaedde7a538c047a0c2435fd2943ad, type: 3}
-    defaultVolume: 1
   - soundType: 5
     clip: {fileID: 8300000, guid: f3f66ec2d506bb940a841285da1e2c05, type: 3}
-    defaultVolume: 1
-  - soundType: 9
+  - soundType: 8
     clip: {fileID: 8300000, guid: 5c4f5b2899314324f854e40deb74336e, type: 3}
-    defaultVolume: 1
+  - soundType: 9
+    clip: {fileID: 8300000, guid: 2fd6b2cd6b4ed404a88119a3f5877593, type: 3}
+  - soundType: 15
+    clip: {fileID: 8300000, guid: 17663e317296e4841b310ab2f9a934be, type: 3}

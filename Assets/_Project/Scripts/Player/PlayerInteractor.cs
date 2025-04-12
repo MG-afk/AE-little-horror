@@ -15,12 +15,14 @@ namespace AE.Player
         private InputSystem _inputSystem;
         private IInteractable _currentInteractable;
         private Camera _camera;
+        private Crosshair _crosshair;
 
         [Inject]
-        private void Construct(InputSystem inputSystem, CameraSystem cameraSystem)
+        private void Construct(InputSystem inputSystem, CameraSystem cameraSystem, Utilities utilities)
         {
             _inputSystem = inputSystem;
             _camera = cameraSystem.MainCamera;
+            _crosshair = utilities.Crosshair;
         }
 
         private void Awake()
@@ -48,9 +50,14 @@ namespace AE.Player
             if (!foundInteractable)
             {
                 _currentInteractable = null;
+                _crosshair.Unhover();
                 return;
             }
 
+            if (_currentInteractable == interactable)
+                return;
+
+            _crosshair.Hover();
             _currentInteractable = interactable;
         }
 

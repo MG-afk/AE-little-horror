@@ -28,7 +28,7 @@ namespace AE.Interactions.Inspectable
 
         public override void Interact()
         {
-            if (_inputSystem.HoldSecondKey)
+            if (_inputSystem.HoldSecondKey && _manipulationSystem.CanPickupItem(this))
             {
                 _manipulationSystem.PickupItem(this);
             }

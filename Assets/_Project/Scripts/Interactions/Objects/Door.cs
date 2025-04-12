@@ -25,7 +25,7 @@ namespace AE.Interactions.Objects
         private async UniTask Sequence()
         {
             _audioSource.PlaySound(SoundType.DoorClose, transform.position);
-            await _utilities.SimplifyDialogueView.Show("Oh... The door is closed");
+            await _utilities.SimplifyDialogueView.Show("Locked. Of course it is.");
         }
     }
 }
