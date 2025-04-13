@@ -87,3 +87,42 @@ Visual Enhancements:
 More advanced shader effects
 Additional VFX for interactions
 Dynamic lighting changes tied to puzzle progression
+
+## Creating a New Riddle Step
+To add a new step to the puzzle chain, you would:
+
+Define Constants: Add any new key identifiers in RiddleConstant class if needed
+Create or Modify an Interactable Object:
+
+Extend InteractableItem or InspectableItem based on behavior needs
+Set the Key and Condition properties in the inspector or code
+
+
+Chain Logic:
+
+The Key property defines what value will be set in the blackboard when interacting with this object
+The Condition property defines what must be true in the blackboard before this interaction can succeed
+Example format: "previous_step_key=expected_value"
+
+Chain Example:
+```cs
+// Object 1 (starting point)
+// Key: "skull_picking" 
+// Condition: "" (empty, so always available)
+// When interacted with, sets "skull_picking" = "skull1_picked"
+
+// Object 2 (depends on Object 1)
+// Key: "fire_progress"
+// Condition: "skull_picking=skull1_picked"
+// When interacted with, sets "fire_progress" = "candle1_lit"
+
+// Object 3 (depends on Object 2)
+// Key: "sword_placement"
+// Condition: "fire_progress=candle1_lit"
+// When interacted with, sets "sword_placement" = "sword1_placed"
+
+// Final object (completes the puzzle)
+// Key: "what_done_is_done"
+// Condition: "sword_placement=sword1_placed"
+// When interacted with, sets "what_done_is_done" = "time_to_die"
+```
