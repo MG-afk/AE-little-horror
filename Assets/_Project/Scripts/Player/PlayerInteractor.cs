@@ -2,6 +2,7 @@
 using AE.Core.Systems;
 using AE.Core.Utility;
 using AE.Interactions;
+using AE.Riddle;
 using UnityEngine;
 using VContainer;
 
@@ -16,13 +17,19 @@ namespace AE.Player
         private IInteractable _currentInteractable;
         private Camera _camera;
         private Crosshair _crosshair;
+        private RiddleSystem _riddleSystem;
 
         [Inject]
-        private void Construct(InputSystem inputSystem, CameraSystem cameraSystem, Utilities utilities)
+        private void Construct(
+            InputSystem inputSystem,
+            CameraSystem cameraSystem,
+            Utilities utilities,
+            RiddleSystem riddleSystem)
         {
             _inputSystem = inputSystem;
             _camera = cameraSystem.MainCamera;
             _crosshair = utilities.Crosshair;
+            _riddleSystem = riddleSystem;
         }
 
         private void Awake()
@@ -63,6 +70,7 @@ namespace AE.Player
 
         private void OnInteract()
         {
+            _riddleSystem.Interacted(_currentInteractable);
             _currentInteractable?.Interact();
         }
     }

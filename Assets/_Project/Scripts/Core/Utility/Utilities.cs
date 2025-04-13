@@ -1,8 +1,9 @@
 ﻿using AE.Interactions.Manipulable;
-using AE.Interactions.Trigger;
+using AE.Interactions.Objects;
 using AE.SimplifyDialogue;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace AE.Core.Utility
 {
@@ -16,6 +17,12 @@ namespace AE.Core.Utility
         [field: SerializeField] public ManipulationHintUI ManipulationHintUI { get; private set; }
         [field: SerializeField] public Ghost Ghost { get; private set; }
         [field: SerializeField] public GameObject PlayerGameObject { get; private set; }
+
+        [Inject]
+        private void Resolve(IObjectResolver objectResolver)
+        {
+            objectResolver.Inject(Ghost);
+        }
 
         public void ShowGameOverScreen()
         {

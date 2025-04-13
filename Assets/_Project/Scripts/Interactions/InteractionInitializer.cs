@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AE.Interactions.Trigger;
@@ -14,6 +15,8 @@ namespace AE.Interactions
         [Inject]
         private void Construct(IObjectResolver objectResolver)
         {
+            FindAll();
+
             foreach (var interactableItem in interactableItems)
             {
                 objectResolver.Inject(interactableItem);
@@ -25,9 +28,7 @@ namespace AE.Interactions
             }
         }
 
-#if UNITY_EDITOR
-
-        private void Reset()
+        private void FindAll()
         {
             const FindObjectsInactive findObjects = FindObjectsInactive.Include;
             const FindObjectsSortMode sortMode = FindObjectsSortMode.None;
@@ -36,6 +37,11 @@ namespace AE.Interactions
             triggers = FindObjectsByType<BaseTrigger>(findObjects, sortMode).ToList();
         }
 
+#if UNITY_EDITOR
+        private void Reset()
+        {
+            FindAll();
+        }
 #endif
     }
 }

@@ -1,6 +1,7 @@
 using AE.Core.Systems;
 using AE.Core.Utility;
-using AE.Interactions.Trigger;
+using AE.Interactions;
+using AE.Interactions.Objects;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using JetBrains.Annotations;

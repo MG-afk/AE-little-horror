@@ -2,13 +2,13 @@
 using AE.Core.Event;
 using AE.Core.StateMachines;
 using JetBrains.Annotations;
-using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace AE.Core.GlobalGameState
 {
     [UsedImplicitly]
-    public class GlobalGameStateMachine : StateMachine<GlobalGameStateMachine.State>
+    public class GlobalGameStateMachine : StateMachine<GlobalGameStateMachine.State>, ITickable, IGlobalGameStateMachine
     {
         public abstract class State : IState
         {
@@ -45,6 +45,11 @@ namespace AE.Core.GlobalGameState
         public void ChangeState(GameMode gameMode)
         {
             ChangeState(_states[gameMode]);
+        }
+
+        public void Tick()
+        {
+            CurrentState?.Update();
         }
     }
 }

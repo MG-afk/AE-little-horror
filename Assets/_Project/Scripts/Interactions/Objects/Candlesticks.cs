@@ -1,14 +1,14 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine;
-using AE.Riddle;
 using DG.Tweening;
-using VContainer;
+using UnityEngine;
 
 namespace AE.Interactions.Objects
 {
     public class Candlesticks : InteractableItem
     {
-        [SerializeField] private GameObject[] fires;
+        [Header("Candlesticks")] [SerializeField]
+        private GameObject[] fires;
+
         [SerializeField] private ParticleSystem[] particles;
         [SerializeField] private Renderer[] renderers;
         [SerializeField] private Light[] lights;
@@ -17,48 +17,21 @@ namespace AE.Interactions.Objects
         [SerializeField] private float lightIntensity = 1.5f;
         [SerializeField] private float lightRange = 3.0f;
 
-        private RiddleBlackboard _blackboard;
         private Color _originalRendererColor;
-
-        [Inject]
-        private void Construct(RiddleBlackboard blackboard)
-        {
-            _blackboard = blackboard;
-        }
 
         private void Awake()
         {
             _originalRendererColor = renderers[0].material.color;
-            _blackboard.NewValueSet += OnBlackboardChanged;
         }
 
-        private void OnDestroy()
+        public void Activate(bool value)
         {
-            _blackboard.NewValueSet -= OnBlackboardChanged;
+            SetActivateCandlesticks(value).Forget();
         }
 
-        private void OnBlackboardChanged(string key, string value)
+        public void ChangeColorToBlue()
         {
-            if (key != RiddleConstant.FireProgress)
-                return;
-
-            switch (value)
-            {
-                case RiddleConstant.Incorrect:
-                    SetActivateCandlesticks(false).Forget();
-                    _blackboard.Remove(key);
-                    break;
-                case RiddleConstant.Done:
-                    ChangeColorAsync(Color.blue, 10f).Forget();
-                    break;
-            }
-        }
-
-        public override void Interact()
-        {
-            SetActivateCandlesticks(true).Forget();
-
-            _blackboard.SetValue(Key, RiddleConstant.Accept);
+            ChangeColorAsync(Color.blue, 10f).Forget();
         }
 
         private async UniTask SetActivateCandlesticks(bool activate)

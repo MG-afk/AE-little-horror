@@ -5,9 +5,9 @@ using AE.Riddle;
 using UnityEngine;
 using VContainer;
 
-namespace AE.Interactions.Trigger
+namespace AE.Interactions.Objects
 {
-    public class Ghost : BaseTrigger
+    public class Ghost : RiddleItem
     {
         [SerializeField] private AudioSource audioSource;
 
@@ -26,26 +26,11 @@ namespace AE.Interactions.Trigger
         private void Awake()
         {
             gameObject.SetActive(false);
-
-            _blackboard.NewValueSet += OnBlackboardChanged;
         }
 
-        private void OnDestroy()
+        public void StartGameOver()
         {
-            _blackboard.NewValueSet -= OnBlackboardChanged;
-        }
-
-        private void OnBlackboardChanged(string key, string value)
-        {
-            if (key == RiddleConstant.EndKey && value == RiddleConstant.EndValue)
-            {
-                _commandBus.Execute(new ChangeGameStateCommand(GameMode.GameOver));
-            }
-        }
-
-
-        protected override void OnTriggerEnter(Collider other)
-        {
+            _commandBus.Execute(new ChangeGameStateCommand(GameMode.GameOver));
         }
     }
 }

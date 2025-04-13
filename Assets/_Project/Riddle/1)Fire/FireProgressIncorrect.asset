@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f63518005e34fbfa0a9e53d42fcee66, type: 3}
-  m_Name: StartGame
+  m_Script: {fileID: 11500000, guid: f6bb55b61fd3417ab07033d05b671abd, type: 3}
+  m_Name: FireProgressIncorrect
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Fire the fire
-  <Key>k__BackingField: 
-  <NextStep>k__BackingField: {fileID: 11400000, guid: cc5d4fdcaf06c1d4da96f9b789bcf83d, type: 2}
+  <Key>k__BackingField: fire_progress
+  <Value>k__BackingField: incorrect

@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f63518005e34fbfa0a9e53d42fcee66, type: 3}
-  m_Name: SecondTime
+  m_Script: {fileID: 11500000, guid: db0b8207397846f387bf81b184079ff2, type: 3}
+  m_Name: 2)FireProgress
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Fire the fire
-  <Key>k__BackingField: 
-  <NextStep>k__BackingField: {fileID: 0}
+  <Key>k__BackingField: fire_progress
+  <Condition>k__BackingField: fire_progress=accepted
+  <Result>k__BackingField: fire_progress=1
+  <TriggerName>k__BackingField: 

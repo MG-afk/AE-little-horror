@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3348810}
   - component: {fileID: 2313322}
   - component: {fileID: 64646662214266494}
-  - component: {fileID: 6758733859363880819}
+  - component: {fileID: 3681206128377717400}
   m_Layer: 16
   m_Name: SD_Prop_Corpse_03
   m_TagString: Untagged
@@ -110,7 +110,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43369072155268444, guid: 28cc8c09b1f42c84297b12139fbdfbda, type: 2}
---- !u!114 &6758733859363880819
+--- !u!114 &3681206128377717400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 113766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b426896dceab6c54db3c62bf4fa92843, type: 3}
+  m_Script: {fileID: 11500000, guid: dedba3203d8b4a5183448f84449b92f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  riddleData: {fileID: 0}
+  riggleTriggers:
+  - triggerData: {fileID: 11400000, guid: efd0b52770f5c3041a60337b3fac3f0f, type: 2}
+    onTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3681206128377717400}
+          m_TargetAssemblyTypeName: AE.Interactions.Trigger.Corpse, AE
+          m_MethodName: SetPosition
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerData: {fileID: 11400000, guid: 5b09a799208de504ab87eed278b79cca, type: 2}
+    onTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3681206128377717400}
+          m_TargetAssemblyTypeName: AE.Interactions.Trigger.Corpse, AE
+          m_MethodName: SetPosition
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerData: {fileID: 11400000, guid: af6cae856cd07af4b91efe18d3b99c33, type: 2}
+    onTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3681206128377717400}
+          m_TargetAssemblyTypeName: AE.Interactions.Trigger.Corpse, AE
+          m_MethodName: SetPosition
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  onInteracted: []
   positions:
-  - {x: 2.7363834, y: -2.5427804, z: 19.63947}
-  - {x: 11.951, y: 3.295, z: 20.52}
-  - {x: 11.32, y: -2.4, z: 4.4}
+  - {x: 3.28, y: -2.84, z: 19.38}
+  - {x: 12.92, y: -3.38, z: 2.68}
+  - {x: 11.951, y: 3.051, z: 20.606}

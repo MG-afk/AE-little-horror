@@ -4,21 +4,16 @@ namespace AE.Core.StateMachines
 {
     public abstract class StateMachine<T> where T : IState
     {
-        private T _currentState;
+        protected T CurrentState { get; private set; }
 
         protected void ChangeState(T newState)
         {
-            if (EqualityComparer<T>.Default.Equals(_currentState, newState))
+            if (EqualityComparer<T>.Default.Equals(CurrentState, newState))
                 return;
 
-            _currentState?.Exit();
-            _currentState = newState;
-            _currentState.Enter();
-        }
-
-        public void Update()
-        {
-            _currentState?.Update();
+            CurrentState?.Exit();
+            CurrentState = newState;
+            CurrentState.Enter();
         }
     }
 }

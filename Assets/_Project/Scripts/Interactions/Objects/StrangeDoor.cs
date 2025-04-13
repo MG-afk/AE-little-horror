@@ -1,6 +1,5 @@
 using AE.Core.Systems.Audio;
 using AE.Core.Utility;
-using AE.Riddle;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -13,29 +12,12 @@ namespace AE.Interactions.Objects
 
         private Utilities _utilities;
         private AudioSystem _audioSource;
-        private RiddleBlackboard _blackboard;
 
         [Inject]
-        private void Construct(Utilities utilities, AudioSystem audioSystem, RiddleBlackboard blackboard)
+        private void Construct(Utilities utilities, AudioSystem audioSystem)
         {
             _utilities = utilities;
             _audioSource = audioSystem;
-            _blackboard = blackboard;
-
-            _blackboard.NewValueSet += OnBlackboardChanged;
-        }
-
-        private void OnDestroy()
-        {
-            _blackboard.NewValueSet -= OnBlackboardChanged;
-        }
-
-        private void OnBlackboardChanged(string key, string value)
-        {
-            if (!_blackboard.CheckCondition(Condition))
-                return;
-
-            bloodOnFloor.SetActive(true);
         }
 
         public override void Interact()

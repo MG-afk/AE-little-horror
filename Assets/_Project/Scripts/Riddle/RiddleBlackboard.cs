@@ -1,20 +1,44 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AE.Riddle
 {
     [Serializable]
     public class RiddleBlackboard
     {
-        public event Action<string, string> NewValueSet;
+        public event Action<string, string> DataChanged;
 
         private readonly Dictionary<string, string> _data = new();
 
         public void SetValue(string key, string value)
         {
+            if (key == null)
+            {
+                Debug.LogWarning("Key cannot be null");
+                return;
+            }
+
             _data[key] = value;
 
-            NewValueSet?.Invoke(key, value);
+            DataChanged?.Invoke(key, value);
+        }
+
+        public bool TrySetResult(string result)
+        {
+            if (string.IsNullOrEmpty(result))
+                return true;
+
+            var parts = result.Split('=');
+
+            if (parts.Length != 2)
+                return false;
+
+            var key = parts[0].Trim();
+            var value = parts[1].Trim();
+
+            SetValue(key, value);
+            return true;
         }
 
         public string GetValue(string key)

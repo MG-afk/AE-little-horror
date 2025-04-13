@@ -2,12 +2,15 @@ using AE.Core.Utility;
 using AE.Riddle;
 using AE.SimplifyDialogue;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer;
 
 namespace AE.Interactions.Inspectable
 {
     public class Skull : InspectableItem
     {
+        [SerializeField] private RiddleItemData riddleItemDataToDisplayText;
+
         private SimplifyDialogueView _simplifyDialogue;
         private RiddleBlackboard _blackboard;
 
@@ -22,7 +25,7 @@ namespace AE.Interactions.Inspectable
         {
             base.Interact();
 
-            if (_blackboard.CheckCondition(Condition))
+            if (_blackboard.CheckCondition(riddleItemDataToDisplayText.Condition))
             {
                 _simplifyDialogue.Show("I need to bring them somewhere").Forget();
             }

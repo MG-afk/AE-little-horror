@@ -148,9 +148,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2def7ffee5bd4401bbdda675f849c1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: fire_progress
-  condition: fire_progress=3
-  fireId: 4
+  riddleData: {fileID: 11400000, guid: 34d8905131ad1c14cac28abcee59152a, type: 2}
+  riggleTriggers:
+  - triggerData: {fileID: 11400000, guid: 947118651883033498574bd4534921ef, type: 2}
+    onTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808129127118272590}
+          m_TargetAssemblyTypeName: AE.Interactions.Objects.Torch, AE
+          m_MethodName: SetFireActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerData: {fileID: 11400000, guid: e128cc7fee50e0743877325fc2f105ce, type: 2}
+    onTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808129127118272590}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  onInteracted:
+  - resultOfInteraction: 0
+    onInteracted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808129127118272590}
+          m_TargetAssemblyTypeName: AE.Interactions.Objects.Torch, AE
+          m_MethodName: SetFireActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    triggerData: {fileID: 11400000, guid: 947118651883033498574bd4534921ef, type: 2}
+  - resultOfInteraction: 1
+    onInteracted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6808129127118272590}
+          m_TargetAssemblyTypeName: AE.Interactions.Objects.Torch, AE
+          m_MethodName: SetFireActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    triggerData: {fileID: 11400000, guid: 947118651883033498574bd4534921ef, type: 2}
   fire: {fileID: 1205254019354202224}
   fireAudio: {fileID: 6529850067136540990}
 --- !u!82 &6529850067136540990

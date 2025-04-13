@@ -37,7 +37,7 @@ namespace AE.Core
 
         public void InstallStates(IContainerBuilder builder)
         {
-            builder.Register<GlobalGameStateMachine>(Lifetime.Singleton);
+            builder.Register<GlobalGameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.Register<GameplayState>(Lifetime.Singleton);
             builder.Register<PauseState>(Lifetime.Singleton);

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3369814}
   - component: {fileID: 2313248}
   - component: {fileID: 64602623299236378}
+  - component: {fileID: 4584685280709721659}
   m_Layer: 0
   m_Name: SD_Env_Door_02
   m_TagString: Untagged
@@ -111,6 +112,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43548945255304490, guid: 52284c6c8ffa41d4483896ab7ea7862e, type: 2}
+--- !u!114 &4584685280709721659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c283924d55423ab91ca71a833eb40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riddleData: {fileID: 0}
+  riggleTriggers: []
+  onInteracted: []
+  bloodOnFloor: {fileID: 9160054129766606049}
 --- !u!1 &1588231320006326577
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +139,7 @@ GameObject:
   - component: {fileID: 4012314807978269966}
   - component: {fileID: 784442875211087679}
   - component: {fileID: 2344410790843314878}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,6 +206,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SD_Prop_BloodSplat_01
       objectReference: {fileID: 0}
+    - target: {fileID: 182368, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 182368, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 491268, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.0775287
@@ -244,10 +269,59 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 182368, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2948071629729176199}
+    - targetCorrespondingSourceObject: {fileID: 182368, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2982224494777812369}
   m_SourcePrefab: {fileID: 100100000, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
 --- !u!4 &9160054129766372229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 491268, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
   m_PrefabInstance: {fileID: 9160054129766460545}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9160054129766606049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 182368, guid: 8bddcfc563a36b24f9dc4f0ce3bbb138, type: 3}
+  m_PrefabInstance: {fileID: 9160054129766460545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2948071629729176199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160054129766606049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2762ceb12c74eb2b3546d2ab7b90772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTag: Skull
+  countOfItemsToBring: 3
+  riddleData: {fileID: 11400000, guid: 99ba7ded635a7d74187fdd09729c5fa0, type: 2}
+  thresholdChangedTrigger: {fileID: 11400000, guid: efd0b52770f5c3041a60337b3fac3f0f, type: 2}
+  completeTrigger: {fileID: 11400000, guid: 4d2efc00be182134898d37bd0841b4c0, type: 2}
+--- !u!65 &2982224494777812369
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9160054129766606049}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.014962725, z: -0.000000014901161}

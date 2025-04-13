@@ -10,7 +10,7 @@ namespace AE.Core
     {
         private readonly GameMode _targetGameMode;
 
-        private GlobalGameStateMachine _stateMachine;
+        private IGlobalGameStateMachine _stateMachine;
 
         public ChangeGameStateCommand(GameMode targetGameMode)
         {
@@ -18,7 +18,7 @@ namespace AE.Core
         }
 
         [Inject]
-        public void Construct(GlobalGameStateMachine stateMachine)
+        public void Construct(IGlobalGameStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
         }

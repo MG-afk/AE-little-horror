@@ -123,8 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd32bae5bdc4b7087cdfb5dc48c07ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 
-  condition: 
+  riddleData: {fileID: 0}
+  riggleTriggers: []
+  onInteracted: []
 --- !u!1 &173666
 GameObject:
   m_ObjectHideFlags: 0
