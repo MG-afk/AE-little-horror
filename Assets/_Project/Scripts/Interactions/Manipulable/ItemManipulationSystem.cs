@@ -68,6 +68,7 @@ namespace AE.Interactions.Manipulable
             _currentHeldItem.Transform.position = desiredPosition;
             _previousPosition = desiredPosition;
 
+            //TODO: add scrollwheel to player input (gameplayState)
             var scrollDelta = Input.GetAxis("Mouse ScrollWheel");
             if (Mathf.Abs(scrollDelta) > 0.01f)
             {
@@ -87,6 +88,7 @@ namespace AE.Interactions.Manipulable
             }
         }
 
+        //TODO: Improve that later
         private Vector3 GetDesiredPositionWithCollisionCheck()
         {
             var cameraPosition = _camera.transform.position;

@@ -12,5 +12,6 @@ namespace AE.Riddle
 
         public const string EndKey = "what_done_is_done";
         public const string EndValue = "time_to_die";
+        public const string Candlestick = "candlestick";
     }
 }

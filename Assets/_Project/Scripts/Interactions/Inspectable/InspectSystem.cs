@@ -37,6 +37,9 @@ namespace AE.Interactions.Inspectable
         private Transform _originalParent;
         private ManipulationHintUI _manipulationHintUI;
 
+        private Vector2 _rotation;
+        private float _zoom;
+
         [Inject]
         private void Construct(
             CameraSystem cameraSystem,
@@ -55,6 +58,25 @@ namespace AE.Interactions.Inspectable
         private void Start()
         {
             _cinemachineCamera = _cameraSystem.GetCinemachine(GameMode.Inspect);
+
+            _inputSystem.Rotated += OnRotate;
+            _inputSystem.Zoomed += OnZoom;
+        }
+
+        private void OnDestroy()
+        {
+            _inputSystem.Rotated -= OnRotate;
+            _inputSystem.Zoomed -= OnZoom;
+        }
+
+        private void OnZoom(float zoom)
+        {
+            _zoom = zoom;
+        }
+
+        private void OnRotate(Vector2 rotation)
+        {
+            _rotation = rotation;
         }
 
         private void Update()
@@ -64,14 +86,14 @@ namespace AE.Interactions.Inspectable
 
             if (Input.GetMouseButton(0))
             {
-                var mouseX = Input.GetAxis("Mouse X");
-                var mouseY = Input.GetAxis("Mouse Y");
+                var mouseX = _rotation.x;
+                var mouseY = _rotation.y;
 
                 _currentItem.Transform.Rotate(Vector3.up, -mouseX * rotationSpeed, Space.Self);
                 _currentItem.Transform.Rotate(Vector3.right, mouseY * rotationSpeed, Space.Self);
             }
 
-            var scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+            var scrollDelta = _zoom;
             if (Mathf.Abs(scrollDelta) > 0.01f)
             {
                 _currentZoom = Mathf.Clamp(_currentZoom - scrollDelta * zoomSpeed, minZoom, maxZoom);

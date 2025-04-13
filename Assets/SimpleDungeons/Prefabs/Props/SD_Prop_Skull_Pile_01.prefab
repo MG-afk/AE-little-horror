@@ -151,5 +151,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 
-  condition: 
+  condition: skull_picking=accept
   rb: {fileID: 1912613054416652096}

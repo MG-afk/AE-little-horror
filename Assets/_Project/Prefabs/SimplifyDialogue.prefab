@@ -195,7 +195,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -253,12 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1316891726541194964}
-  canvas: {fileID: 266917695191443144}
   canvasGroup: {fileID: 2050313528774201222}
-  backgroundPanel: {fileID: 8219626282455899770}
-  fadeOutDuration: 1.2
-  fadeInEase: 12
-  fadeOutEase: 11
 --- !u!225 &2050313528774201222
 CanvasGroup:
   m_ObjectHideFlags: 0

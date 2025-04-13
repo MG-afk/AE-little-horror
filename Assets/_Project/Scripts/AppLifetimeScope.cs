@@ -28,7 +28,7 @@ namespace AE
 
             builder.RegisterComponent(utilities);
 
-            builder.RegisterEntryPoint<HorrorAudioService>();
+            builder.Register<HorrorAudioService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<Bootstrapper>();
         }
     }

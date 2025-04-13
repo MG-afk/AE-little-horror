@@ -53,16 +53,21 @@ namespace AE.Interactions.Objects
 
         public override void Interact()
         {
-            _audioSystem.PlaySound(SoundType.FireUp, .5f);
-
             if (!_blackboard.CheckCondition(Condition))
             {
-                _blackboard.SetValue(RiddleConstant.FireProgress, RiddleConstant.Incorrect);
+                if ((_blackboard.HasKey(RiddleConstant.FireProgress) || _blackboard.HasKey(RiddleConstant.Candlestick)) &&
+                    _blackboard.GetValue(RiddleConstant.FireProgress) != RiddleConstant.Incorrect)
+                {
+                    _blackboard.SetValue(RiddleConstant.FireProgress, RiddleConstant.Incorrect);
+                    _audioSystem.PlaySound(SoundType.FireBlownOut, 1f);
+                }
 
                 _utilities.SimplifyDialogueView.Show("Looks like I can't fire that up.", 1.5f).Forget();
 
                 return;
             }
+
+            _audioSystem.PlaySound(SoundType.FireUp, .5f);
 
             SetActiveCandlesticks(true);
             fireAudio.Play();

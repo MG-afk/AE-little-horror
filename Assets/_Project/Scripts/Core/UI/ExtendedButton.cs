@@ -114,21 +114,21 @@ namespace AE.Core.UI
                 audioSystem.PlaySound(clickSoundType);
             }
 
-            if (useClickAnimation)
-            {
-                KillTweens();
+            if (!useClickAnimation)
+                return;
 
-                _currentSequence = DOTween.Sequence();
+            KillTweens();
 
-                _currentSequence.Append(transform.DOScale(_originalScale * clickScaleReduction,
-                    clickAnimationDuration * .5f));
+            _currentSequence = DOTween.Sequence();
 
-                var endScale = eventData.pointerEnter == gameObject
-                    ? _originalScale * hoverScaleFactor
-                    : _originalScale;
+            _currentSequence.Append(transform.DOScale(_originalScale * clickScaleReduction,
+                clickAnimationDuration * .5f));
 
-                _currentSequence.Append(transform.DOScale(endScale, clickAnimationDuration * .5f));
-            }
+            var endScale = eventData.pointerEnter == gameObject
+                ? _originalScale * hoverScaleFactor
+                : _originalScale;
+
+            _currentSequence.Append(transform.DOScale(endScale, clickAnimationDuration * .5f));
         }
 
         private void ResetAppearance()

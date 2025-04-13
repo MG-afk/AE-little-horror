@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace AE.Core.Utility
 {
+    //TODO: That class is a helper to speed prototyping it should be refactored later
     public class Utilities : MonoBehaviour
     {
         [SerializeField] private GameObject gameOverScreen;
@@ -20,6 +21,7 @@ namespace AE.Core.Utility
         {
             gameOverScreen.SetActive(true);
 
+            //TODO: Create GameOver Screen
             gameOverScreen.GetComponentInChildren<Button>().onClick.AddListener(ExitGame);
         }
 

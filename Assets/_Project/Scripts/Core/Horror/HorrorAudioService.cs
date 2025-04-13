@@ -2,12 +2,11 @@ using AE.Core.Systems.Audio;
 using AE.Core.Utility;
 using JetBrains.Annotations;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace AE.Core.Horror
 {
     [UsedImplicitly]
-    public class HorrorAudioService : ITickable
+    public class HorrorAudioService
     {
         private readonly AudioSystem _audioSystem;
         private readonly Transform _playerTransform;
@@ -31,7 +30,7 @@ namespace AE.Core.Horror
             ScheduleNextSound();
         }
 
-        public void Tick()
+        public void Update()
         {
             if (!(Time.time >= _nextSoundTime) || _audioSystem.HorrorSounds.Length <= 0)
                 return;

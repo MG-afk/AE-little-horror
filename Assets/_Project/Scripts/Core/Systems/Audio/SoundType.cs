@@ -27,5 +27,7 @@ namespace AE.Core.Systems.Audio
         Warning,
         
         FireUp,
+        FireBlownOut,
+        
     }
 }

@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace AE.Core.Input
 {
+    //TODO: We should have a Interfaced inputs for different action map
     [UsedImplicitly]
     public sealed class InputSystem : IDisposable
     {
@@ -26,9 +27,6 @@ namespace AE.Core.Input
         private readonly EventManager _eventManager;
 
         private readonly Dictionary<GameMode, InputActionMap> _actionMaps = new();
-
-        //TODO: bind it better currently sprinted
-        public bool HoldSecondKey { get; private set; }
 
         public InputSystem(EventManager eventManager)
         {
@@ -108,8 +106,6 @@ namespace AE.Core.Input
                 {
                     _inputSystem.Sprinted?.Invoke();
                 }
-
-                _inputSystem.HoldSecondKey = context.performed;
             }
         }
 

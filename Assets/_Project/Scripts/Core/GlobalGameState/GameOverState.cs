@@ -36,6 +36,7 @@ namespace AE.Core.GlobalGameState
             PlayJumpScareSequenceAsync(gameOverCinemachine, ghost).Forget();
         }
 
+        //TODO: Create a sequence system to have more control
         private async UniTaskVoid PlayJumpScareSequenceAsync(CinemachineCamera gameOverCinemachine, Ghost ghost)
         {
             ghost.gameObject.SetActive(true);

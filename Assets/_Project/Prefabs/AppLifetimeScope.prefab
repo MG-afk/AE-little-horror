@@ -329,6 +329,13 @@ MonoBehaviour:
   pooledAudioSourceCount: 10
   audioSourcePrefab: {fileID: 6339631582352102890, guid: eb0a898ebb75dd14cbc617e7b0cb6a94, type: 3}
   audioSourcePoolParent: {fileID: 8561128217511877850}
+  <HorrorSounds>k__BackingField:
+  - {fileID: 8300000, guid: 4d856de6f78ca564f88fc5bc285fbf11, type: 3}
+  - {fileID: 8300000, guid: 0b25f8c7be516d94b8a91851ea10ca84, type: 3}
+  - {fileID: 8300000, guid: 9d13e0729ce80b54c809f0a014562ff8, type: 3}
+  - {fileID: 8300000, guid: 23e435de5f563d84693d18193ae01517, type: 3}
+  - {fileID: 8300000, guid: 987cf61b55bf61e43a9a1c8cc9280111, type: 3}
+  - {fileID: 8300000, guid: 2ca4c7533f39af04d8335c8b6cfc92ac, type: 3}
 --- !u!1 &5669691436416493521
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +477,7 @@ GameObject:
   - component: {fileID: 8025454748415388282}
   - component: {fileID: 3948793771518708857}
   - component: {fileID: 1481458927165152602}
+  - component: {fileID: 3224525064291785333}
   m_Layer: 0
   m_Name: FirstPersonCinemachine
   m_TagString: Untagged
@@ -499,7 +507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6398227542424117706}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
@@ -627,6 +635,23 @@ MonoBehaviour:
         DecelTime: 0.2
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &3224525064291785333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6398227542424117706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weight: 1
+  FocusTracking: 0
+  FocusTarget: {fileID: 0}
+  FocusOffset: 0
+  Profile: {fileID: 11400000, guid: acd68e5662841ce4aaba94f9d579de20, type: 2}
 --- !u!1 &6802633696264652543
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +970,7 @@ MonoBehaviour:
   <Crosshair>k__BackingField: {fileID: 0}
   <ManipulationHintUI>k__BackingField: {fileID: 0}
   <Ghost>k__BackingField: {fileID: 0}
+  <PlayerGameObject>k__BackingField: {fileID: 0}
 --- !u!1 &7852923742602682713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1161,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   triggers:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

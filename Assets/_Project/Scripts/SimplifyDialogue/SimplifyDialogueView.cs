@@ -2,8 +2,6 @@ using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace AE.SimplifyDialogue
 {
