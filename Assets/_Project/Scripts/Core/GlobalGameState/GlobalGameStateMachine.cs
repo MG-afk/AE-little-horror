@@ -33,11 +33,13 @@ namespace AE.Core.GlobalGameState
         public GlobalGameStateMachine(
             GameplayState gameplayState,
             PauseState pauseState,
-            InspectState inspectState)
+            InspectState inspectState,
+            GameOverState gameOverState)
         {
             _states[GameMode.Gameplay] = gameplayState;
             _states[GameMode.Pause] = pauseState;
             _states[GameMode.Inspect] = inspectState;
+            _states[GameMode.GameOver] = gameOverState;
         }
 
         public void ChangeState(GameMode gameMode)

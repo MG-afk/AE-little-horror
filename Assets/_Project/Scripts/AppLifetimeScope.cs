@@ -1,11 +1,10 @@
 using AE.Core;
+using AE.Core.Horror;
 using AE.Core.Utility;
 using AE.Interactions;
-using AE.Interactions.Inspectable;
 using AE.Pause;
 using AE.Riddle;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 using VContainer.Unity;
 
@@ -29,6 +28,7 @@ namespace AE
 
             builder.RegisterComponent(utilities);
 
+            builder.RegisterEntryPoint<HorrorAudioService>();
             builder.RegisterEntryPoint<Bootstrapper>();
         }
     }

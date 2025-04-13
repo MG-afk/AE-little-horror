@@ -42,6 +42,7 @@ namespace AE.Core
             builder.Register<GameplayState>(Lifetime.Singleton);
             builder.Register<PauseState>(Lifetime.Singleton);
             builder.Register<InspectState>(Lifetime.Singleton);
+            builder.Register<GameOverState>(Lifetime.Singleton);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AE.Core;
 using AE.Core.Commands;
 using AE.Core.GlobalGameState;
+using AE.Core.Utility;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -35,7 +36,7 @@ namespace AE.Pause
             transform.localScale = Vector3.zero;
 
             resumeButton.onClick.AddListener(Resume);
-            exitButton.onClick.AddListener(ExitGame);
+            exitButton.onClick.AddListener(Utilities.ExitGame);
 
             optionsButton.interactable = false;
         }
@@ -43,7 +44,7 @@ namespace AE.Pause
         private void OnDestroy()
         {
             resumeButton.onClick.RemoveListener(Resume);
-            exitButton.onClick.RemoveListener(ExitGame);
+            exitButton.onClick.RemoveListener(Utilities.ExitGame);
         }
 
         public async UniTask ShowAsync()
@@ -85,15 +86,6 @@ namespace AE.Pause
         private void Resume()
         {
             _commandBus.Execute(new ChangeGameStateCommand(GameMode.Gameplay));
-        }
-
-        private static void ExitGame()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
         }
     }
 }

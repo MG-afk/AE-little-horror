@@ -66,7 +66,11 @@ namespace AE.Interactions.Objects
             foreach (var fire in fires)
             {
                 fire.SetActive(activate);
-                await UniTask.Delay(1000);
+
+                if (activate)
+                {
+                    await UniTask.Delay(1000);
+                }
             }
         }
 

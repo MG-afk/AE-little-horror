@@ -2,6 +2,7 @@
 using AE.Interactions.Trigger;
 using AE.SimplifyDialogue;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AE.Core.Utility
 {
@@ -13,10 +14,22 @@ namespace AE.Core.Utility
         [field: SerializeField] public Crosshair Crosshair { get; private set; }
         [field: SerializeField] public ManipulationHintUI ManipulationHintUI { get; private set; }
         [field: SerializeField] public Ghost Ghost { get; private set; }
+        [field: SerializeField] public GameObject PlayerGameObject { get; private set; }
 
         public void ShowGameOverScreen()
         {
             gameOverScreen.SetActive(true);
+
+            gameOverScreen.GetComponentInChildren<Button>().onClick.AddListener(ExitGame);
+        }
+
+        public static void ExitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }

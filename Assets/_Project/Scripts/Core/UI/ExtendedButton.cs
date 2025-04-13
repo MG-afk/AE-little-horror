@@ -121,13 +121,13 @@ namespace AE.Core.UI
                 _currentSequence = DOTween.Sequence();
 
                 _currentSequence.Append(transform.DOScale(_originalScale * clickScaleReduction,
-                    clickAnimationDuration / 2));
+                    clickAnimationDuration * .5f));
 
                 var endScale = eventData.pointerEnter == gameObject
                     ? _originalScale * hoverScaleFactor
                     : _originalScale;
 
-                _currentSequence.Append(transform.DOScale(endScale, clickAnimationDuration / 2));
+                _currentSequence.Append(transform.DOScale(endScale, clickAnimationDuration * .5f));
             }
         }
 

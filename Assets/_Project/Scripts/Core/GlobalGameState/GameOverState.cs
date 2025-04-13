@@ -2,6 +2,7 @@ using AE.Core.Systems;
 using AE.Core.Utility;
 using AE.Interactions.Trigger;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 using Unity.Cinemachine;
@@ -22,11 +23,10 @@ namespace AE.Core.GlobalGameState
 
         public override void Enter()
         {
-            //TODO: Cursor System! 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            EventManager.Notify(new GameStateEnterEvent(GameMode.Gameplay));
+            EventManager.Notify(new GameStateEnterEvent(GameMode.GameOver));
 
             _cameraSystem.AlignCameras(GameMode.Gameplay, GameMode.GameOver);
 
@@ -39,42 +39,47 @@ namespace AE.Core.GlobalGameState
         private async UniTaskVoid PlayJumpScareSequenceAsync(CinemachineCamera gameOverCinemachine, Ghost ghost)
         {
             ghost.gameObject.SetActive(true);
-            
+
             await UniTask.Delay(500);
 
-            gameOverCinemachine.LookAt = ghost.transform;
+            var direction = ghost.transform.position - gameOverCinemachine.transform.position;
+            var targetRotation = Quaternion.LookRotation(direction);
 
+            gameOverCinemachine.transform.DORotateQuaternion(targetRotation, 0.3f).SetEase(Ease.OutExpo);
             await UniTask.Delay(300);
 
-            var player = GameObject.FindGameObjectWithTag("Player");
+            var player = _utilities.PlayerGameObject;
             var startPos = ghost.transform.position;
             var targetPos = player.transform.position;
 
             targetPos.y = startPos.y;
 
-            var duration = 1.0f;
-            float elapsedTime = 0;
+            var totalDistance = Vector3.Distance(startPos, targetPos);
+            const float ghostSpeed = 5.0f;
+            var remainingDistance = totalDistance;
 
-            while (elapsedTime < duration)
+            ghost.AudioSource.Play();
+
+            while (remainingDistance > 1f)
             {
-                ghost.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
-                elapsedTime += Time.deltaTime;
+                var moveDistance = ghostSpeed * Time.deltaTime;
+                var t = Mathf.Clamp01(moveDistance / remainingDistance);
+                ghost.transform.position = Vector3.Lerp(ghost.transform.position, targetPos, t);
+
+                remainingDistance = Vector3.Distance(ghost.transform.position, targetPos);
+
                 await UniTask.Yield();
             }
 
             ghost.transform.position = targetPos;
 
-
-            var audioSource = ghost.AudioSource;
-            ghost.AudioSource.Play();
-
-            var audioDuration = audioSource.clip.length;
-            await UniTask.Delay((int)(audioDuration * 1000));
-
-            _utilities.FadeOut(0.5f);
-            await UniTask.Delay(5000);
+            _utilities.FadeIn(0.5f);
+            await UniTask.Delay(500);
 
             _utilities.ShowGameOverScreen();
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         public override void Exit()

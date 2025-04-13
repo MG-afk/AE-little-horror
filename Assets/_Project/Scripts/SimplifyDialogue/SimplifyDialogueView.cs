@@ -11,17 +11,12 @@ namespace AE.SimplifyDialogue
     public class SimplifyDialogueView : MonoBehaviour
     {
         private const float FadeInDuration = .25f;
+        private const Ease FadeInEase = Ease.OutQuad;
+        private const float FadeOutDuration = 1.2f;
+        private const Ease FadeOutEase = Ease.InQuad;
 
-        [Header("References")] [SerializeField]
-        private TextMeshProUGUI dialogueText;
-
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private CanvasGroup canvasGroup;
-        [SerializeField] private Image backgroundPanel;
-
-        [SerializeField] private float fadeOutDuration = 1.0f;
-        [SerializeField] private Ease fadeInEase = Ease.OutQuad;
-        [SerializeField] private Ease fadeOutEase = Ease.InQuad;
 
         private bool _isAnimating;
 
@@ -40,11 +35,10 @@ namespace AE.SimplifyDialogue
 
             dialogueText.text = text;
 
-            canvas.enabled = true;
             canvasGroup.alpha = 0f;
             dialogueText.alpha = 0f;
 
-            await canvasGroup.DOFade(1f, FadeInDuration).SetEase(fadeInEase).AsyncWaitForCompletion();
+            await canvasGroup.DOFade(1f, FadeInDuration).SetEase(FadeInEase).AsyncWaitForCompletion();
             await dialogueText.DOFade(1f, duration).SetEase(Ease.InOutSine).AsyncWaitForCompletion();
 
             await Hide();
@@ -53,9 +47,8 @@ namespace AE.SimplifyDialogue
         private async UniTask Hide()
         {
             await dialogueText.DOFade(0f, 0.5f).SetEase(Ease.InOutSine).AsyncWaitForCompletion();
-            await canvasGroup.DOFade(0f, fadeOutDuration).SetEase(fadeOutEase).AsyncWaitForCompletion();
+            await canvasGroup.DOFade(0f, FadeOutDuration).SetEase(FadeOutEase).AsyncWaitForCompletion();
 
-            canvas.enabled = false;
             _isAnimating = false;
         }
     }

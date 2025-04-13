@@ -39,7 +39,7 @@ namespace AE.Core.Utility
         {
             if (_currentTween != null && _currentTween.IsActive())
             {
-                _currentTween.Kill(false);
+                _currentTween.Kill();
             }
 
             _currentTween = crosshairImage.transform
@@ -52,7 +52,7 @@ namespace AE.Core.Utility
         {
             if (_currentTween != null && _currentTween.IsActive())
             {
-                _currentTween.Kill(false);
+                _currentTween.Kill();
             }
         }
     }

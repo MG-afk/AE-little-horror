@@ -7,6 +7,7 @@ namespace AE.Riddle
         public const string Accept = "accept";
 
         public const string FireProgress = "fire_progress";
+        public const string SkullPicking = "skull_picking";
         public const string Inspected = "inspected";
 
         public const string EndKey = "what_done_is_done";

@@ -53,7 +53,7 @@ namespace AE.Interactions.Objects
 
         public override void Interact()
         {
-            _audioSystem.PlaySound(SoundType.FireUp);
+            _audioSystem.PlaySound(SoundType.FireUp, .5f);
 
             if (!_blackboard.CheckCondition(Condition))
             {

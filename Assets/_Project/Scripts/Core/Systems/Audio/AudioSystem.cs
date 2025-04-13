@@ -27,6 +27,8 @@ namespace AE.Core.Systems.Audio
 
         private EventManager _eventManager;
 
+        [field: SerializeField] public AudioClip[] HorrorSounds { get; private set; }
+
         [Inject]
         private void Construct(EventManager eventManager)
         {
@@ -144,16 +146,17 @@ namespace AE.Core.Systems.Audio
             return source;
         }
 
-        public void PlayHorrorSound(AudioClip clip, Vector3 position, float volume = 1f)
+        public void PlayHorrorSound(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
         {
             if (clip == null)
                 return;
 
-            AudioSource source = GetAvailableAudioSource();
+            var source = GetAvailableAudioSource();
+
             if (source == null)
                 return;
 
-            ConfigurePositionalAudioSource(source, position, clip, volume);
+            ConfigurePositionalAudioSource(source, position, clip, volume, pitch);
 
             DisableAfterPlayAsync(source).Forget();
         }
@@ -178,11 +181,17 @@ namespace AE.Core.Systems.Audio
             return clip;
         }
 
-        private void ConfigurePositionalAudioSource(AudioSource source, Vector3 position, AudioClip clip, float volume)
+        private void ConfigurePositionalAudioSource(
+            AudioSource source,
+            Vector3 position,
+            AudioClip clip,
+            float volume,
+            float pitch = 1f)
         {
             source.transform.position = position;
             source.clip = clip;
             source.volume = volume;
+            source.pitch = pitch;
             source.spatialBlend = 1f;
             source.minDistance = 1f;
             source.maxDistance = 15f;

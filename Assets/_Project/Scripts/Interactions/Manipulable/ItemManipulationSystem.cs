@@ -1,3 +1,4 @@
+using AE.Core.Commands;
 using AE.Core.Input;
 using AE.Core.Systems;
 using AE.Core.Utility;
@@ -18,6 +19,7 @@ namespace AE.Interactions.Manipulable
         [SerializeField] private float maxMoveSpeed = 10f;
         [SerializeField] private float collisionOffset = 0.1f;
 
+        private CommandBus _commandBus;
         private InspectableItem _currentHeldItem;
         private CameraSystem _cameraSystem;
         private InputSystem _inputSystem;
@@ -30,10 +32,12 @@ namespace AE.Interactions.Manipulable
 
         [Inject]
         private void Construct(
+            CommandBus commandBus,
             CameraSystem cameraSystem,
             InputSystem inputSystem,
             Utilities utilities)
         {
+            _commandBus = commandBus;
             _cameraSystem = cameraSystem;
             _inputSystem = inputSystem;
             _manipulationHintUI = utilities.ManipulationHintUI;
@@ -70,17 +74,16 @@ namespace AE.Interactions.Manipulable
                 holdDistance = Mathf.Clamp(holdDistance - scrollDelta, minHoldDistance, maxHoldDistance);
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                PlaceItem();
-            }
-            else if (Input.GetKeyDown(KeyCode.Q))
+
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 DropItem();
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetKeyDown(KeyCode.I))
             {
+                var item = _currentHeldItem;
                 CancelHolding();
+                _commandBus.Execute(new ChangeToInspectionModeCommand(item));
             }
         }
 
@@ -142,19 +145,6 @@ namespace AE.Interactions.Manipulable
                 : 0.5f;
 
             _currentHeldItem.Transform.SetParent(null);
-        }
-
-        private void PlaceItem()
-        {
-            if (_currentHeldItem == null)
-                return;
-
-            _currentHeldItem.Transform.SetParent(_originalParent, true);
-            _currentHeldItem.Rigidbody.isKinematic = false;
-
-            _isHolding = false;
-            _currentHeldItem = null;
-            _manipulationHintUI.Hide();
         }
 
         private void DropItem()

@@ -1,41 +1,39 @@
-﻿using System;
-using AE.Core;
+﻿using AE.Core;
 using AE.Core.Commands;
 using AE.Core.GlobalGameState;
-using AE.Core.Systems;
-using AE.Core.Systems.Audio;
 using AE.Core.Utility;
+using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using VContainer.Unity;
 
 namespace AE
 {
     [UsedImplicitly]
-    public sealed class Bootstrapper : IStartable, IDisposable
+    public sealed class Bootstrapper : IStartable
     {
+        private const float FadeInDuration = 1f;
+
         private readonly Utilities _utilities;
         private readonly CommandBus _commandBus;
-        private readonly AudioSystem _audioSystem;
 
-        public Bootstrapper(
-            Utilities utilities,
-            CommandBus commandBus,
-            AudioSystem audioSystem)
+        public Bootstrapper(Utilities utilities, CommandBus commandBus)
         {
             _utilities = utilities;
             _commandBus = commandBus;
-            _audioSystem = audioSystem;
         }
 
         public void Start()
         {
-            _utilities.FadeOut(1f);
+            _utilities.FadeOut(FadeInDuration);
             _commandBus.Execute(new ChangeGameStateCommand(GameMode.Gameplay));
+
+            DialogueSequence().Forget();
         }
 
-        public void Dispose()
+        private async UniTask DialogueSequence()
         {
-            // TODO release managed resources here
+            await _utilities.SimplifyDialogueView.Show("Where am I?");
+            await _utilities.SimplifyDialogueView.Show("Shit, It is too dark here");
         }
     }
 }

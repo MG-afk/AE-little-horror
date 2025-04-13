@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3313230}
   - component: {fileID: 2321716}
   - component: {fileID: 64081055339493018}
-  - component: {fileID: 7350530336608936667}
   - component: {fileID: 2417789495245404375}
+  - component: {fileID: 2189964705486534246}
   m_Layer: 13
   m_Name: SD_Prop_Sword_Rusty_01
   m_TagString: Untagged
@@ -112,21 +112,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43591370481900230, guid: a685ca8eaa2765d418be640300e96b8c, type: 2}
---- !u!114 &7350530336608936667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 067d631484ed4776a951b2cec2166881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: 
-  condition: 
-  rb: {fileID: 2417789495245404375}
 --- !u!54 &2417789495245404375
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,6 +139,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2189964705486534246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf72c0e0192c442a890f3f5c4e6b7d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: sword
+  condition: text_on_wall=inspected
+  rb: {fileID: 2417789495245404375}
+  text: {fileID: 1229528285563013557}
 --- !u!1 &1229528285563013557
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229528285563013557}
   m_LocalRotation: {x: -0.4667957, y: 0.52987856, z: 0.4714886, w: 0.528232}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0032}
+  m_LocalPosition: {x: 0, y: 0, z: 0.159}
   m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188,7 +189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -83.128, y: 88.726, z: 1.638}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0415, y: 0.0466}
+  m_AnchoredPosition: {x: -0.041, y: 0.046}
   m_SizeDelta: {x: 50, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &590442855867041524

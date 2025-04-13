@@ -6,7 +6,8 @@ using AE.Core.Systems;
 using AE.Core.Utility;
 using AE.Interactions.Manipulable;
 using AE.Riddle;
-using UnityEditor.Experimental.GraphView;
+using DG.Tweening;
+using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
 
@@ -21,16 +22,18 @@ namespace AE.Interactions.Inspectable
         [SerializeField] private float zoomSpeed = 0.5f;
         [SerializeField] private float minZoom = 0.5f;
         [SerializeField] private float maxZoom = 2f;
+        [SerializeField] private float cameraRotationDuration = 0.5f; // Duration for the camera rotation tween
 
         private InspectableItem _currentItem;
         private CameraSystem _cameraSystem;
         private CommandBus _commandBus;
         private InputSystem _inputSystem;
         private RiddleBlackboard _blackboard;
+        private CinemachineCamera _cinemachineCamera;
 
         private Vector3 _initialItemScale;
         private float _currentZoom = 1f;
-        private bool _isInspecting = false;
+        private bool _isInspecting;
         private Transform _originalParent;
         private ManipulationHintUI _manipulationHintUI;
 
@@ -49,6 +52,11 @@ namespace AE.Interactions.Inspectable
             _manipulationHintUI = utilities.ManipulationHintUI;
         }
 
+        private void Start()
+        {
+            _cinemachineCamera = _cameraSystem.GetCinemachine(GameMode.Inspect);
+        }
+
         private void Update()
         {
             if (!_isInspecting || _currentItem == null)
@@ -58,8 +66,9 @@ namespace AE.Interactions.Inspectable
             {
                 var mouseX = Input.GetAxis("Mouse X");
                 var mouseY = Input.GetAxis("Mouse Y");
-                _currentItem.Transform.Rotate(Vector3.up, -mouseX * rotationSpeed, Space.World);
-                _currentItem.Transform.Rotate(Vector3.right, mouseY * rotationSpeed, Space.World);
+
+                _currentItem.Transform.Rotate(Vector3.up, -mouseX * rotationSpeed, Space.Self);
+                _currentItem.Transform.Rotate(Vector3.right, mouseY * rotationSpeed, Space.Self);
             }
 
             var scrollDelta = Input.GetAxis("Mouse ScrollWheel");
@@ -72,7 +81,12 @@ namespace AE.Interactions.Inspectable
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 ExitInspection();
-                _commandBus.Execute(new ChangeGameStateCommand(GameMode.Gameplay));
+            }
+            else if (Input.GetKeyDown(KeyCode.R))
+            {
+                var item = _currentItem;
+                ExitInspection();
+                _commandBus.Execute(new ChangeToManipulationModeCommand(item));
             }
         }
 
@@ -97,6 +111,12 @@ namespace AE.Interactions.Inspectable
             _manipulationHintUI.ShowPlacementHints();
 
             _commandBus.Execute(new ChangeGameStateCommand(GameMode.Inspect));
+
+            var currentRotation = _cinemachineCamera.transform.rotation.eulerAngles;
+            var targetRotation = new Vector3(0f, currentRotation.y, currentRotation.z);
+
+            _cinemachineCamera.transform.DORotate(targetRotation, cameraRotationDuration)
+                .SetEase(Ease.OutQuint);
         }
 
         public void ExitInspection()
@@ -113,6 +133,8 @@ namespace AE.Interactions.Inspectable
             _currentItem = null;
             _originalParent = null;
             _manipulationHintUI.Hide();
+
+            _commandBus.Execute(new ChangeGameStateCommand(GameMode.Gameplay));
         }
     }
 }

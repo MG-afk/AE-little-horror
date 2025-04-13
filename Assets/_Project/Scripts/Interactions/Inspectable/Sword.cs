@@ -6,7 +6,7 @@ namespace AE.Interactions.Inspectable
 {
     public class Sword : InspectableItem
     {
-        [SerializeField] private GameObject _text;
+        [SerializeField] private GameObject text;
 
         private RiddleBlackboard _blackboard;
 
@@ -18,6 +18,11 @@ namespace AE.Interactions.Inspectable
             _blackboard.NewValueSet += OnBlackboardChanged;
         }
 
+        private void Awake()
+        {
+            text.gameObject.SetActive(false);
+        }
+
         private void OnDestroy()
         {
             _blackboard.NewValueSet -= OnBlackboardChanged;
@@ -27,7 +32,7 @@ namespace AE.Interactions.Inspectable
         {
             if (_blackboard.CheckCondition(Condition))
             {
-                _text.gameObject.SetActive(true);
+                text.gameObject.SetActive(true);
             }
         }
     }
